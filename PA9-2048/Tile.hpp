@@ -5,16 +5,19 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
-class Paddle : public sf::RectangleShape, public sf::Font
+class Tile : public sf::RectangleShape, public sf::Font
 {
 public:
-	Paddle(const sf::Vector2f& size, const sf::Vector2f& pos, const sf::Color& newColor) : RectangleShape(size)
+	Tile(const sf::Vector2f& size, const sf::Vector2f& pos, const sf::Color& newColor, const int newNumber) : RectangleShape(size)
 	{
 		setFillColor(newColor);
 		setPosition(pos);
+		setNumber(newNumber);
 	}
 
+	void setNumber(int newNumber);
+	int getNumber(void);
 
 private:	
-
+	int number;
 };

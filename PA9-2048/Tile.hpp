@@ -5,7 +5,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
-class Paddle : public sf::RectangleShape
+class Paddle : public sf::RectangleShape, public sf::Font
 {
 public:
 	Paddle(const sf::Vector2f& size, const sf::Vector2f& pos, const sf::Color& newColor) : RectangleShape(size)

@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include <iostream>
@@ -5,7 +6,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
-class Tile : public sf::RectangleShape, public sf::Font
+	class Tile : public sf::RectangleShape, public sf::Font
 {
 public:
 	Tile(const sf::Vector2f& size, const sf::Vector2f& pos, const sf::Color& newColor) : RectangleShape(size)
@@ -14,7 +15,7 @@ public:
 		setPosition(pos);
 	}
 
-		
-private:	
+
+private:
 
 };

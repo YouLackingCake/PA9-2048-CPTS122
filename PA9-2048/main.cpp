@@ -1,30 +1,37 @@
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/Music.hpp>
 
 #include "Tile.hpp"
+#include "Grid.hpp"
 
 int main(void)
 {
-	sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");//window is 500 by 500
-
 	//sf::Music mus;
 	//mus.openFromFile("");//open music file named ""
 	//mus.play();//play the music
 
-	while (window.isOpen())//loop while window is open
+	const int tileSize = 150;
+	const int gridSize = 4;  // Rows and columns
+	const sf::Color newColor = sf::Color::Red;
+	sf::Font newFont;
+
+	sf::RenderWindow window(sf::VideoMode(800, 800), "2048!");
+	Grid grid(gridSize, gridSize, tileSize, newColor, newFont);  // Creates a 4 X 4 grid
+
+	grid.initGrid(gridSize);  // Initialize grid to 0
+
+
+	while (window.isOpen())  // Loop while window is open
 	{
-		sf::Event event;//declare an event type
+		sf::Event event;  // Declare an event type
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)//check for the window to close
-				window.close();//close window
+			if (event.type == sf::Event::Closed)  // Check for the window to close
+				window.close();  // Close window
 		}
 
 		window.clear();
-
-		//draw statements
-
+		grid.draw(window);  // Draws grid to window
 		window.display();
 	}
 

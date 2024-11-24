@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <iostream>
@@ -15,7 +14,7 @@ public:
 		setPosition(pos);
 	}
 
-
+	
 private:
 
 };

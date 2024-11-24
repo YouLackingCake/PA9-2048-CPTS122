@@ -1,4 +1,3 @@
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/Music.hpp>
 
@@ -6,19 +5,19 @@
 
 int main(void)
 {
-	sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");//window is 500 by 500
+	sf::RenderWindow window(sf::VideoMode(1000, 1000), "2048!");  // Window is 500 by 500
 
 	//sf::Music mus;
 	//mus.openFromFile("");//open music file named ""
 	//mus.play();//play the music
 
-	while (window.isOpen())//loop while window is open
+	while (window.isOpen())  // Loop while window is open
 	{
-		sf::Event event;//declare an event type
+		sf::Event event;  // Declare an event type
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)//check for the window to close
-				window.close();//close window
+			if (event.type == sf::Event::Closed)  // Check for the window to close
+				window.close();  // Close window
 		}
 
 		window.clear();

@@ -12,7 +12,7 @@ int main(void)
 
 	const int tileSize = 150;
 	const int gridSize = 4;  // Rows and columns
-	const sf::Color newColor = sf::Color::Red;
+	const sf::Color newColor(208, 214, 219);  // Makes boxes gray (empty spaces)
 	sf::Font newFont;
 
 	sf::RenderWindow window(sf::VideoMode(800, 800), "2048!");

@@ -13,7 +13,6 @@ Grid::Grid(const int& rows, const int& cols, const int& newTileSize,
 		{
 			int x = j * tileSize + (j + 1) * 5;  // Add padding between cols of tiles / position tile
 			int y = i * tileSize + (i + 1) * 5;  // Add padding between rows of tiles / position tile
-			//row.emplace_back(x, y, tileSize);  // Place tile into correct row spot
 			row.emplace_back(sf::Vector2f(tileSize, tileSize), sf::Vector2f(x + 90, y + 90), 
 				newColor, 0/*value*/, newFont);  // Pass the new arguments
 		}
@@ -37,6 +36,11 @@ void Grid::draw(sf::RenderWindow& window)
 void Grid::setTileValue(int& row, int& col, int& value)
 {
 	tiles[row][col].setValue(value);  // Sets tile value using tile method setValue()
+}
+
+vector<vector<Tile>> Grid::getTiles() const
+{
+	return tiles;
 }
 
 int Grid::getTileSize() const

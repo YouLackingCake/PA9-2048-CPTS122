@@ -18,6 +18,7 @@ public:
 	void draw(sf::RenderWindow& window);  // Draws grid
 	void setTileValue(int& row, int& col, int& value);  // Sets number shown on tile
 
+	vector<vector<Tile>> getTiles() const;
 	int getTileSize() const;
 	void setTileSize(int& newTileSize);
 

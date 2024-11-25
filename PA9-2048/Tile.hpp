@@ -21,6 +21,7 @@ public:
 	}
 
 	void setValue(int& newValue);
+	int getValue() const;
 	void draw(sf::RenderWindow& window);  // Draw tile
 
 private:

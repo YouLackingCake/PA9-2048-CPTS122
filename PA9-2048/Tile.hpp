@@ -9,7 +9,7 @@ class Tile : public sf::RectangleShape//, public sf::Font
 {
 public:
 	Tile(const sf::Vector2f& size, const sf::Vector2f& pos, const sf::Color& newColor,
-		const int newValue, sf::Font newFont) : RectangleShape(size), value(newValue)
+		/*const*/ int newValue, sf::Font newFont) : RectangleShape(size), value(newValue) // took away the const for testing purposes
 	{
 		setFillColor(newColor);
 		setPosition(pos);
@@ -18,6 +18,7 @@ public:
 		text.setFont(newFont);
 		text.setFillColor(sf::Color::Black);
 		text.setPosition(pos.x, pos.y);
+		setValue(newValue); // set initial value and center text
 	}
 
 	void setValue(int& newValue);

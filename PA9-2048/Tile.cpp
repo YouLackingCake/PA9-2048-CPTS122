@@ -4,6 +4,11 @@ void Tile::setValue(int& newValue)
 {
 	value = newValue;
 	text.setString(std::to_string(value));  // Show number on tile when drawn
+
+	// center text on tile
+	sf::FloatRect textBounds = text.getLocalBounds();
+	text.setOrigin(textBounds.width / 2, textBounds.height / 2);
+	text.setPosition(getPosition().x + getSize().x / 2, getPosition().y + getSize().y / 2);
 }
 
 void Tile::draw(sf::RenderWindow& window)

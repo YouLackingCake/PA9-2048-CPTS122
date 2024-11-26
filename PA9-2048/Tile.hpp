@@ -1,3 +1,11 @@
+/*****************************************************************
+* Programmers: Carson CLary, Kyla Jones, Lily Hirano, Kendall Reid
+* Class: CptS 122, Fall 2024;
+* Programming Assignment: PA9
+* Date:12/04/2024
+* Description: 2048 game using SFML. Header for tile type
+*****************************************************************/
+
 #pragma once
 
 #include <iostream>

@@ -5,22 +5,21 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
-class Tile : public sf::RectangleShape//, public sf::Font
+class Tile : public sf::RectangleShape, public sf::Font
 {
 public:
 	Tile(const sf::Vector2f& size, const sf::Vector2f& pos, const sf::Color& newColor,
-		const int newValue, sf::Font newFont) : RectangleShape(size), value(newValue)
+		const int newValue, sf::Font& newFont) : RectangleShape(size), value(newValue)
 	{
 		setFillColor(newColor);
 		setPosition(pos);
-
-		text.setCharacterSize(20);
 		text.setFont(newFont);
-		text.setFillColor(sf::Color::Black);
-		text.setPosition(pos.x, pos.y);
-	}
+		text.setCharacterSize(20);
+		text.setFillColor(sf::Color::White);
+		text.setPosition(pos.x + size.x /2.f, pos.y + size.y / 2.f );  //work in progress. issues with bounds of text
 
-	void setValue(int& newValue);
+	}
+	void setValue(int newValue);
 	void draw(sf::RenderWindow& window);  // Draw tile
 
 private:

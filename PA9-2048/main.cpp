@@ -14,12 +14,24 @@ int main(void)
 	const int gridSize = 4;  // Rows and columns
 	const sf::Color newColor = sf::Color::Red;
 	sf::Font newFont;
+	
+
+	
+		
+	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
 	sf::RenderWindow window(sf::VideoMode(800, 800), "2048!");
 	Grid grid(gridSize, gridSize, tileSize, newColor, newFont);  // Creates a 4 X 4 grid
 
 	grid.initGrid(gridSize);  // Initialize grid to 0
-
+	
+	
+	
+	//Test Squares//////////////
+	int row = 1, column = 1, value = 1;
+	grid.setTileValue(row, column, value);
+	grid.setTileValue(0, 0, 2048);
+	////////////////////////////
 
 	while (window.isOpen())  // Loop while window is open
 	{

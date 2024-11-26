@@ -1,9 +1,12 @@
 #include "Tile.hpp"
 
-void Tile::setValue(int& newValue)
+void Tile::setValue(int newValue)
 {
 	value = newValue;
+	
 	text.setString(std::to_string(value));  // Show number on tile when drawn
+	text.setFillColor(sf::Color::White);
+	text.setCharacterSize(50);
 }
 
 void Tile::draw(sf::RenderWindow& window)

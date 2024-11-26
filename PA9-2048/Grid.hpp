@@ -9,17 +9,18 @@
 
 using std::vector;
 
+
 class Grid
 {
 public:
 	Grid(const int& rows, const int& cols, const int& newTileSize,
-		const sf::Color& newColor, sf::Font newFont);
+		const sf::Color& newColor, sf::Font &newFont);
 
 	void draw(sf::RenderWindow& window);  // Draws grid
-	void setTileValue(int& row, int& col, int& value);  // Sets number shown on tile
+	void setTileValue(int row, int col, int value);  // Sets number shown on tile
 
 	int getTileSize() const;
-	void setTileSize(int& newTileSize);
+	void setTileSize(int newTileSize);
 
 	void initGrid(const int& gridSize);  // Initialize values of grid to be 0
 

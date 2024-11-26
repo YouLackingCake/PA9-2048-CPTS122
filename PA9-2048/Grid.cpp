@@ -2,7 +2,7 @@
 //#include "Grid.hpp"
 
 Grid::Grid(const int& rows, const int& cols, const int& newTileSize, 
-	const sf::Color& newColor, sf::Font newFont)
+	const sf::Color& newColor, sf::Font &newFont)
 {
 	tileSize = newTileSize;
 
@@ -34,7 +34,7 @@ void Grid::draw(sf::RenderWindow& window)
 }
 
 // Set number shown on tile
-void Grid::setTileValue(int& row, int& col, int& value)
+void Grid::setTileValue(int row, int col, int value)
 {
 	tiles[row][col].setValue(value);  // Sets tile value using tile method setValue()
 }
@@ -44,7 +44,7 @@ int Grid::getTileSize() const
 	return tileSize;
 }
 
-void Grid::setTileSize(int& newTileSize)
+void Grid::setTileSize(int newTileSize)
 {
 	tileSize = newTileSize;
 }

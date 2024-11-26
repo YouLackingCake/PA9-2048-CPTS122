@@ -39,16 +39,9 @@ int main(void)
 	Grid grid(gridSize, gridSize, tileSize, newColor, newFont);  // Creates a 4 X 4 grid
 
 	grid.initGrid(gridSize);  // Initialize grid to 0
-<<<<<<< HEAD
 
-	// Do twice so two spots on grid are 2 to start
-	generateRandomSpot(grid);
-	generateRandomSpot(grid);
-=======
-	
 	grid.spawnRandomTile();//when game starts, randomly generate 2 tiles
 	grid.spawnRandomTile();
->>>>>>> main
 
 	while (window.isOpen())  // Loop while window is open
 	{

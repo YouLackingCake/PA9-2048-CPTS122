@@ -26,13 +26,9 @@ public:
 		text.setPosition(pos.x + size.x /2.f, pos.y + size.y / 2.f );  //work in progress. issues with bounds of text
 
 	}
-<<<<<<< HEAD
 
-	void setValue(int& newValue);
-	int getValue() const;
-=======
 	void setValue(int newValue);
->>>>>>> main
+
 	void draw(sf::RenderWindow& window);  // Draw tile
 	int getValue() const;
 	

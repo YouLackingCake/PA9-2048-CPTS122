@@ -8,17 +8,16 @@
 
 #pragma once
 
-#include <iostream>
-#include <fstream>
-#include <string>
 #include <vector>
 #include <cstdlib>
+#include <ctime>
+#include <cstdbool>
 
 #include <SFML/Graphics.hpp>
 
 #include "Tile.hpp"
 
-using std::vector;
+using namespace std;
 
 
 class Grid
@@ -35,10 +34,12 @@ public:
 
 	void initGrid(const int& gridSize);  // Initialize values of grid to be 0
 	
-	void moveLeft(int gridSize);
-	void moveRight(int gridSize);
-	void moveUp(int gridSize);
-	void moveDown(int gridSize);
+	bool moveLeft(int gridSize);
+	bool moveRight(int gridSize);
+	bool moveUp(int gridSize);
+	bool moveDown(int gridSize);
+
+	void spawnRandomTile();
 
 private:
 	vector<vector<Tile>> tiles;  // Creates 2D array out of vectors of Tile

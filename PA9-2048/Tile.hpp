@@ -21,6 +21,10 @@ public:
 	}
 	void setValue(int newValue);
 	void draw(sf::RenderWindow& window);  // Draw tile
+	int getValue() const;
+
+
+	
 
 private:
 	int value;  // Number of tile

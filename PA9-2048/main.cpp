@@ -14,7 +14,9 @@
 
 int main(void)
 {
+	srand(static_cast<unsigned>(time(nullptr)));//seeded random using time
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "2048!");
+	window.setKeyRepeatEnabled(false);
 
 	//sf::Music mus;
 	//mus.openFromFile("");//open music file named ""
@@ -24,7 +26,6 @@ int main(void)
 	const int gridSize = 4;  // Rows and columns
 	const sf::Color newColor = sf::Color::Red;
 	sf::Font newFont;
-	
 
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
@@ -33,13 +34,9 @@ int main(void)
 
 	grid.initGrid(gridSize);  // Initialize grid to 0
 	
-	
-	//Test Squares//////////////
-	grid.setTileValue(1, 1, 1);
-	grid.setTileValue(1, 2, 1);
-	grid.setTileValue(0, 0, 2048);
-	grid.setTileValue(3, 3, 4);
-	////////////////////////////
+
+	grid.spawnRandomTile();//when game starts, randomly generate 2 tiles
+	grid.spawnRandomTile();
 
 
 	while (window.isOpen())  // Loop while window is open
@@ -51,26 +48,37 @@ int main(void)
 				window.close();  // Close window
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		bool madeMove = false;
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))//check for up
 		{
-			grid.moveUp(gridSize);
+			madeMove = grid.moveUp(gridSize);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))//check for left
 		{
-			grid.moveRight(gridSize);
+			madeMove = grid.moveRight(gridSize);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))//check for down
 		{
-			grid.moveDown(gridSize);
+			madeMove = grid.moveDown(gridSize);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))//check for right
 		{
-			grid.moveLeft(gridSize);
+			madeMove = grid.moveLeft(gridSize);
 		}
 
-		window.clear();
+		if (madeMove == true)
+		{
+			grid.spawnRandomTile();//randomly generate new tiles
+
+			//calculate score
+			// 
+			//check for game over
+		}
+
+		window.clear();//clear the window
 		grid.draw(window);  // Draws grid to window
-		window.display();
+		window.display();//display changes to window
 	}
 
 	return 0;

@@ -28,9 +28,10 @@ int main(void)
 	
 	
 	//Test Squares//////////////
-	int row = 1, column = 1, value = 1;
-	grid.setTileValue(row, column, value);
+	grid.setTileValue(1, 1, 1);
+	grid.setTileValue(1, 2, 1);
 	grid.setTileValue(0, 0, 2048);
+	grid.setTileValue(3, 3, 4);
 	////////////////////////////
 
 	while (window.isOpen())  // Loop while window is open
@@ -41,6 +42,29 @@ int main(void)
 			if (event.type == sf::Event::Closed)  // Check for the window to close
 				window.close();  // Close window
 		}
+
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		{
+			grid.moveUp(gridSize);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			grid.moveRight(gridSize);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			grid.moveDown(gridSize);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			grid.moveLeft(gridSize);
+		}
+
+
+
+
+
 
 		window.clear();
 		grid.draw(window);  // Draws grid to window

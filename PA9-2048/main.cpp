@@ -4,9 +4,11 @@
 
 #include "Tile.hpp"
 
+using namespace std;
+
 int main(void)
 {
-	sf::RenderWindow window(sf::VideoMode(1000, 1000), "PA9- 2048");//open window 1000x1000
+	sf::RenderWindow window(sf::VideoMode(1500, 1000), "PA9- 2048");//open window 1500x1000
 
 	//sf::Music mus;
 	//mus.openFromFile("");//open music file named ""
@@ -20,6 +22,8 @@ int main(void)
 			if (event.type == sf::Event::Closed)//check for the window to close
 				window.close();//close window
 		}
+
+
 
 		window.clear();
 

@@ -54,8 +54,3 @@ void Tile::draw(sf::RenderWindow& window)
 		window.draw(text);  // Text only drawn if value is greater than 0
 	}
 }
-
-int Tile::getValue() const
-{
-	return value;
-}

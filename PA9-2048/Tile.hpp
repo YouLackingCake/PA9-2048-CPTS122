@@ -29,10 +29,7 @@ public:
 	void setValue(int newValue);
 	void draw(sf::RenderWindow& window);  // Draw tile
 	int getValue() const;
-
-
 	
-
 private:
 	int value;  // Number of tile
 	sf::Text text;  // Text object to show number in font and size we want

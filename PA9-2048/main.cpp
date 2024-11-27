@@ -16,7 +16,7 @@ int main(void)
 {
 	srand(static_cast<unsigned>(time(nullptr)));//seeded random using time
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "2048!");
-	window.setKeyRepeatEnabled(false);
+	window.setKeyRepeatEnabled(false);//makes it so holding a key down only counts as one key press
 
 	//sf::Music mus;
 	//mus.openFromFile("");//open music file named ""
@@ -29,15 +29,14 @@ int main(void)
 
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
+	//Make a menu?
 
 	Grid grid(gridSize, gridSize, tileSize, newColor, newFont);  // Creates a 4 X 4 grid
 
 	grid.initGrid(gridSize);  // Initialize grid to 0
 	
-
 	grid.spawnRandomTile();//when game starts, randomly generate 2 tiles
 	grid.spawnRandomTile();
-
 
 	while (window.isOpen())  // Loop while window is open
 	{
@@ -67,13 +66,15 @@ int main(void)
 			madeMove = grid.moveLeft(gridSize);
 		}
 
-		if (madeMove == true)
+		if (madeMove == true)//checks if a valid move was made
 		{
-			grid.spawnRandomTile();//randomly generate new tiles
+			//grid.spawnRandomTile();//randomly generate new tiles
 
-			//calculate score
-			// 
+			//calculate score, might be good to do this within the move functions?
+
 			//check for game over
+				//if game over, end game
+				//-> go back to a menu?
 		}
 
 		window.clear();//clear the window

@@ -44,4 +44,5 @@ public:
 private:
 	vector<vector<Tile>> tiles;  // Creates 2D array out of vectors of Tile
 	int tileSize;  // Size of Tile used for spacing
+	int score;
 };

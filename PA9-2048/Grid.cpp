@@ -39,6 +39,17 @@ void Grid::draw(sf::RenderWindow& window)
 			tile.draw(window);  // Draws tile to window
 		}
 	}
+
+	sf::Font newFont;
+	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
+
+	sf::Text scoreText;
+	scoreText.setFont(newFont);
+	scoreText.setString("Score: " + to_string(score));
+	scoreText.setCharacterSize(40);
+	scoreText.setFillColor(sf::Color::White);
+	scoreText.setPosition(10, 10);
+	window.draw(scoreText);
 }
 
 // Set number shown on tile
@@ -211,7 +222,7 @@ bool Grid::moveDown(int gridSize)
 
 void Grid::spawnRandomTile()
 {
-	vector<pair<int, int>> emptyTiles;
+	vector<pair<int, int>> emptyTiles;//vactor to fill with empty tile coordinates
 
 	for (int row = 0; row < tiles.size(); row++)//traverse rows
 	{

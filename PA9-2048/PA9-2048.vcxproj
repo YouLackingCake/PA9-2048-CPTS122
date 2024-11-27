@@ -24,12 +24,11 @@
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneralMethods.hpp" />
     <ClInclude Include="Grid.hpp" />
     <ClInclude Include="Tile.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="arial.ttf" />
+    <Font Include="SparkyStonesRegular-BW6ld.ttf" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -1,3 +1,4 @@
+
 /*****************************************************************
 * Programmers: Carson CLary, Kyla Jones, Lily Hirano, Kendall Reid
 * Class: CptS 122, Fall 2024;
@@ -41,11 +42,6 @@ void Tile::setValue(int newValue)
 	}
 }
 
-int Tile::getValue() const
-{
-	return value;
-}
-
 void Tile::draw(sf::RenderWindow& window)
 {
 	window.draw(*this);  // Since inherited draws this tile rectangle shape
@@ -53,4 +49,9 @@ void Tile::draw(sf::RenderWindow& window)
 	{
 		window.draw(text);  // Text only drawn if value is greater than 0
 	}
+}
+
+int Tile::getValue() const
+{
+	return value;
 }

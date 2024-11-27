@@ -11,7 +11,6 @@
 
 #include "Tile.hpp"
 #include "Grid.hpp"
-#include "GeneralMethods.hpp"
 
 int main(void)
 {
@@ -22,15 +21,11 @@ int main(void)
 	//sf::Music mus;
 	//mus.openFromFile("");//open music file named ""
 	//mus.play();//play the music
-	srand(time(0));
-	int row = 0, col = 0, value = 2;
 
 	int tileSize = window.getSize().x / 5;//scales size of tiles in relation to window size
 	const int gridSize = 4;  // Rows and columns
-	const sf::Color newColor(208, 214, 219);  // Makes boxes gray (empty spaces)
-
+	const sf::Color newColor = sf::Color::Red;
 	sf::Font newFont;
-	newFont.loadFromFile("arial.ttf");
 
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
@@ -73,7 +68,7 @@ int main(void)
 
 		if (madeMove == true)//checks if a valid move was made
 		{
-			//grid.spawnRandomTile();//randomly generate new tiles
+			grid.spawnRandomTile();//randomly generate new tiles
 
 			//calculate score, might be good to do this within the move functions?
 

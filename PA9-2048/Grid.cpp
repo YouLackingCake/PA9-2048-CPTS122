@@ -1,3 +1,4 @@
+
 /*****************************************************************
 * Programmers: Carson CLary, Kyla Jones, Lily Hirano, Kendall Reid
 * Class: CptS 122, Fall 2024;
@@ -9,8 +10,8 @@
 #include "Grid.hpp"
 //#include "Grid.hpp"
 
-Grid::Grid(const int& rows, const int& cols, const int& newTileSize, 
-	const sf::Color& newColor, sf::Font &newFont)
+Grid::Grid(const int& rows, const int& cols, const int& newTileSize,
+	const sf::Color& newColor, sf::Font& newFont)
 {
 	tileSize = newTileSize;
 
@@ -21,7 +22,8 @@ Grid::Grid(const int& rows, const int& cols, const int& newTileSize,
 		{
 			int x = j * tileSize + (j + 1) * 5;  // Add padding between cols of tiles / position tile
 			int y = i * tileSize + (i + 1) * 5;  // Add padding between rows of tiles / position tile
-			row.emplace_back(sf::Vector2f(tileSize, tileSize), sf::Vector2f(x + 90, y + 90), 
+			//row.emplace_back(x, y, tileSize);  // Place tile into correct row spot
+			row.emplace_back(sf::Vector2f(tileSize, tileSize), sf::Vector2f(x + 90, y + 90),
 				newColor, 0/*value*/, newFont);  // Pass the new arguments
 		}
 		tiles.push_back(row);  // Add each row to member vector tiles to create array
@@ -55,11 +57,6 @@ void Grid::draw(sf::RenderWindow& window)
 void Grid::setTileValue(int row, int col, int value)
 {
 	tiles[row][col].setValue(value);  // Sets tile value using tile method setValue()
-}
-
-vector<vector<Tile>> Grid::getTiles() const
-{
-	return tiles;
 }
 
 int Grid::getTileSize() const
@@ -113,7 +110,7 @@ bool Grid::moveLeft(int gridSize)
 				}
 			}
 			column++;
-		}	
+		}
 		row++;
 	}
 	return moved;
@@ -123,7 +120,7 @@ bool Grid::moveRight(int gridSize)
 {
 	int row = 0, column = gridSize - 1;
 	bool moved = false;
-	while (row  < gridSize)  //cycle through each row
+	while (row < gridSize)  //cycle through each row
 	{
 		column = gridSize - 1;
 

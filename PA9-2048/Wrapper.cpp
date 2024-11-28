@@ -46,6 +46,9 @@ void Wrapper::run()
 		case GameState::MainMenu:
 			handleMainMenu(window, gameState);
 			break;
+		case GameState::SubMenu:
+			handleSubMenu(window, gameState);
+			break;
 		case GameState::Playing:
 			handlePlaying(window, gameState, grid, gridSize);
 			break;
@@ -98,14 +101,83 @@ void Wrapper::handleMainMenu(sf::RenderWindow& window, GameState& gameState)
 	window.draw(exit);
 
 	// Changes state of game based on key pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) // added submenu
 	{
-		gameState = GameState::Playing;
+		gameState = GameState::SubMenu;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
 		gameState = GameState::Exit;
 	}
+}
+
+void Wrapper::handleSubMenu(sf::RenderWindow& window, GameState& gameState)
+{
+	std::unique_ptr<GameMode> gameMode; // pointer to base class for polymorphism stuff
+	sf::Text subMenu, select, mode;
+	sf::Font font;
+
+	font.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
+
+
+	subMenu.setFont(font);
+	subMenu.setString("Sub-menu");
+	subMenu.setCharacterSize(80);
+	subMenu.setFillColor(sf::Color(246, 124, 95));
+	subMenu.setPosition(window.getSize().x / 5, window.getSize().y / 6);
+
+	select.setFont(font);
+	select.setString("Select a game mode:");
+	select.setCharacterSize(60);
+	select.setFillColor(sf::Color(245, 149, 99));
+	select.setPosition(window.getSize().x / 4, window.getSize().y / 3);
+
+	mode.setFont(font);
+	mode.setString("1) Classic\n2) Challenge\n3) Timed"); //potential options
+	mode.setCharacterSize(50);
+	mode.setFillColor(sf::Color(245, 149, 99));
+	mode.setPosition(window.getSize().x / 3.5, window.getSize().y / 2.25);
+
+	while (gameState == GameState::SubMenu)
+	{
+	sf::Event event;
+	while (window.pollEvent(event))
+	{
+		if (event.type == sf::Event::Closed)
+		{
+			gameState = GameState::Exit;
+			return;
+		}
+		if (event.type == sf::Event::KeyPressed)
+		{
+			if (event.key.code == sf::Keyboard::Num1)
+			{
+				gameMode = std::make_unique<ClassicMode>(); // sets game to classic mode
+				gameState = GameState::Playing;
+				return;
+			}
+			else if (event.key.code == sf::Keyboard::Num2)
+			{
+				gameMode = std::make_unique<ClassicMode>(); // will set game to challenge mode
+				gameState = GameState::Playing;
+				return;
+			}
+			else if (event.key.code == sf::Keyboard::Num3)
+			{
+				gameMode = std::make_unique<ClassicMode>(); //will set game to timed mode
+				gameState = GameState::Playing;
+				return;
+			}
+		}
+
+	}
+		window.clear();
+		window.draw(subMenu);
+		window.draw(select);
+		window.draw(mode);
+		window.display();
+	}
+
 }
 
 void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid& grid, const int& gridSize)

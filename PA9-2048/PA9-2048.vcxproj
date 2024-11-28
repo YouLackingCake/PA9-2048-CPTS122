@@ -22,10 +22,15 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Grid.hpp" />
     <ClInclude Include="Tile.hpp" />
+    <ClInclude Include="Wrapper.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="SparkyStonesRegular-BW6ld.ttf" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

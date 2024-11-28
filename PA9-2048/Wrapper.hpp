@@ -9,8 +9,10 @@
 #pragma once
 
 #include "Grid.hpp"
+#include "GameModeBase.hpp"
+#include "ClassicMode.hpp"
 
-enum class GameState { MainMenu, Playing, Exit };
+enum class GameState { MainMenu, SubMenu, Playing, Exit }; // added submenu
 
 class Wrapper
 {
@@ -20,5 +22,6 @@ public:
 
 private:
 	void handleMainMenu(sf::RenderWindow& window, GameState& gameState);
+	void handleSubMenu(sf::RenderWindow& window, GameState& gameState);
 	void handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid& grid, const int& gridSize);
 };

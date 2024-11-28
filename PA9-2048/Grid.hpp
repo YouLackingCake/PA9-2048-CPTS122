@@ -14,7 +14,6 @@
 #include <cstdbool>
 
 #include <SFML/Graphics.hpp>
-
 #include "Tile.hpp"
 
 using namespace std;

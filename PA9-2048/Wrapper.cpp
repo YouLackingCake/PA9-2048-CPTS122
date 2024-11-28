@@ -111,38 +111,71 @@ void Wrapper::handleMainMenu(sf::RenderWindow& window, GameState& gameState)
 void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid& grid, const int& gridSize)
 {
 	bool madeMove = false;
+	static bool keyHandled = false;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
 		gameState = GameState::Exit;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))//check for up
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !keyHandled)//check for up
 	{
+		keyHandled = true;
 		madeMove = grid.moveUp(gridSize);
+		if (madeMove)
+		{
+			grid.spawnRandomTile();
+		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))//check for left
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !keyHandled)//check for left
 	{
+		keyHandled = true;
 		madeMove = grid.moveRight(gridSize);
+		if (madeMove)
+		{
+			grid.spawnRandomTile();
+		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))//check for down
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !keyHandled)//check for down
 	{
+		keyHandled = true;
 		madeMove = grid.moveDown(gridSize);
+		if (madeMove)
+		{
+			grid.spawnRandomTile();
+		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))//check for right
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !keyHandled)//check for right
 	{
+		keyHandled = true;
 		madeMove = grid.moveLeft(gridSize);
+		if (madeMove)
+		{
+			grid.spawnRandomTile();
+		}
 	}
 
-	if (madeMove == true)//checks if a valid move was made
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
+		!sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+		!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
+		!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) &&
+		!sf::Keyboard::isKeyPressed(sf::Keyboard::W) &&
+		!sf::Keyboard::isKeyPressed(sf::Keyboard::A) &&
+		!sf::Keyboard::isKeyPressed(sf::Keyboard::S) &&
+		!sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		//grid.spawnRandomTile();//randomly generate new tiles
+		keyHandled = false;
+	}
+
+	//if (madeMove == true)//checks if a valid move was made
+	//{
+		//grid.spawnRandomTile(); //randomly generate new tiles
 
 		//calculate score, might be good to do this within the move functions?
 
 		//check for game over
 			//if game over, end game
 			//-> go back to a menu?
-	}
+	//}
 
 	grid.draw(window);  // Draws grid to window
 }

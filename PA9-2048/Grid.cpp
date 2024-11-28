@@ -85,6 +85,7 @@ bool Grid::moveLeft(int gridSize)
 {
 	int row = 0, column = 0;
 	bool moved = false;
+
 	while (row < gridSize)  //cycle through each row
 	{
 		column = 0;
@@ -98,14 +99,14 @@ bool Grid::moveLeft(int gridSize)
 			{
 				if (left == 0) //if tile to left is 0, swap places
 				{
-					tiles[row][column].setValue(left);
 					tiles[row][column + 1].setValue(current);
+					tiles[row][column].setValue(0); //(left);
 					moved = true;
 				}
 				else if (current == left) //merge if same value
 				{
-					tiles[row][column].setValue(0);
 					tiles[row][column + 1].setValue(current + left);
+					tiles[row][column].setValue(0);
 					moved = true;
 				}
 			}
@@ -120,33 +121,34 @@ bool Grid::moveRight(int gridSize)
 {
 	int row = 0, column = gridSize - 1;
 	bool moved = false;
+
 	while (row < gridSize)  //cycle through each row
 	{
 		column = gridSize - 1;
 
-		while (column > 0) //cycle through each column
-		{
-			int current = tiles[row][column].getValue();
-			int right = tiles[row][column - 1].getValue();
-
-			if (current != 0) //if not 0, choose what action to do
+			while (column > 0) //cycle through each column
 			{
-				if (right == 0) //if tile to right is 0, swap places
+				int current = tiles[row][column].getValue();
+				int right = tiles[row][column - 1].getValue();
+
+				if (current != 0) //if not 0, choose what action to do
 				{
-					tiles[row][column].setValue(right);
-					tiles[row][column - 1].setValue(current);
-					moved = true;
+					if (right == 0) //if tile to right is 0, swap places
+					{
+						tiles[row][column - 1].setValue(current);
+						tiles[row][column].setValue(0); //(right);
+						moved = true;
+					}
+					else if (current == right) //merge if same value
+					{
+						tiles[row][column - 1].setValue(current + right);
+						tiles[row][column].setValue(0);					
+						moved = true;
+					}
 				}
-				else if (current == right) //merge if same value
-				{
-					tiles[row][column].setValue(0);
-					tiles[row][column - 1].setValue(current + right);
-					moved = true;
-				}
+				column--;
 			}
-			column--;
-		}
-		row++;
+			row++;
 	}
 	return moved;
 }
@@ -168,14 +170,14 @@ bool Grid::moveUp(int gridSize)
 			{
 				if (up == 0) //if tile above is 0, swap places
 				{
-					tiles[row][column].setValue(up);
 					tiles[row - 1][column].setValue(current);
+					tiles[row][column].setValue(0); //(up);
 					moved = true;
 				}
 				else if (current == up) //merge if same value
 				{
-					tiles[row - 1][column].setValue(0);
 					tiles[row - 1][column].setValue(current + up);
+					tiles[row][column].setValue(0); // original [row - 1]
 					moved = true;
 				}
 			}
@@ -203,14 +205,14 @@ bool Grid::moveDown(int gridSize)
 			{
 				if (up == 0) //if tile below is 0, swap places
 				{
-					tiles[row][column].setValue(up);
 					tiles[row + 1][column].setValue(current);
+					tiles[row][column].setValue(0); //(up);
 					moved = true;
 				}
 				else if (current == up) //merge if same value
 				{
-					tiles[row + 1][column].setValue(0);
 					tiles[row + 1][column].setValue(current + up);
+					tiles[row][column].setValue(0); // original [row + 1]
 					moved = true;
 				}
 			}

@@ -105,7 +105,7 @@ bool Grid::moveLeft(int gridSize)
 				}
 				else if (current == left) //merge if same value
 				{
-					tiles[row][column + 1].setValue(current + left);
+					tiles[row][column + 1].setValue(left + current);
 					tiles[row][column].setValue(0);
 					moved = true;
 				}
@@ -141,7 +141,7 @@ bool Grid::moveRight(int gridSize)
 					}
 					else if (current == right) //merge if same value
 					{
-						tiles[row][column - 1].setValue(current + right);
+						tiles[row][column - 1].setValue(right + current);
 						tiles[row][column].setValue(0);					
 						moved = true;
 					}
@@ -176,7 +176,7 @@ bool Grid::moveUp(int gridSize)
 				}
 				else if (current == up) //merge if same value
 				{
-					tiles[row - 1][column].setValue(current + up);
+					tiles[row - 1][column].setValue(up + current);
 					tiles[row][column].setValue(0); // original [row - 1]
 					moved = true;
 				}
@@ -211,7 +211,7 @@ bool Grid::moveDown(int gridSize)
 				}
 				else if (current == up) //merge if same value
 				{
-					tiles[row + 1][column].setValue(current + up);
+					tiles[row + 1][column].setValue(up + current);
 					tiles[row][column].setValue(0); // original [row + 1]
 					moved = true;
 				}

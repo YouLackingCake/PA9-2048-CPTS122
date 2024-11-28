@@ -18,6 +18,7 @@
 
 using namespace std;
 
+#define GRID_SIZE 4
 
 class Grid
 {
@@ -39,6 +40,8 @@ public:
 	bool moveDown(int gridSize);
 
 	void spawnRandomTile();
+
+	bool isGameOver();
 
 private:
 	vector<vector<Tile>> tiles;  // Creates 2D array out of vectors of Tile

@@ -248,3 +248,22 @@ void Grid::spawnRandomTile()
 		setTileValue(selectedRow, selectedCol, value);
 	}
 }
+
+bool Grid::isGameOver()
+{
+	for (int row = 0; row < GRID_SIZE; ++row)//traverse the rows
+	{
+		for (int column = 0; column < GRID_SIZE; ++column)//traverse the columns
+		{
+			int current = tiles[row][column].getValue();//get the value of the current tile
+			if (current == 0) return false;//if any tile is empty, game is not over
+
+			if (row > 0 && current == tiles[row - 1][column].getValue()) return false;//equivilent tile in the same column
+			if (row < 3 && current == tiles[row + 1][column].getValue()) return false;
+
+			if (column > 0 && current == tiles[row][column - 1].getValue()) return false;//equivilent tile in the same row
+			if (row < 3 && current == tiles[row][column + 1].getValue()) return false;
+		}
+	}
+	return true;//the game is over
+}

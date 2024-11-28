@@ -16,16 +16,15 @@ void Wrapper::run()
 
 
 	int tileSize = window.getSize().x / 5;//scales size of tiles in relation to window size
-	const int gridSize = 4;  // Rows and columns
 	const sf::Color newColor = sf::Color::Red;
 
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
 	GameState gameState = GameState::MainMenu;  // Start game in main menu
-	Grid grid(gridSize, gridSize, tileSize, newColor, newFont);  // Creates a 4 X 4 grid
+	Grid grid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont);  // Creates a 4 X 4 grid
 
-	grid.initGrid(gridSize);  // Initialize grid to 0
+	grid.initGrid(GRID_SIZE);  // Initialize grid to 0
 	grid.spawnRandomTile();//when game starts, randomly generate 2 tiles
 	grid.spawnRandomTile();
 
@@ -47,7 +46,7 @@ void Wrapper::run()
 			handleMainMenu(window, gameState);
 			break;
 		case GameState::Playing:
-			handlePlaying(window, gameState, grid, gridSize);
+			handlePlaying(window, gameState, grid, GRID_SIZE);
 			break;
 		case GameState::Exit:
 			window.close();
@@ -111,6 +110,7 @@ void Wrapper::handleMainMenu(sf::RenderWindow& window, GameState& gameState)
 void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid& grid, const int& gridSize)
 {
 	bool madeMove = false;
+	bool gameOver = false;
 	static bool keyHandled = false;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
@@ -163,19 +163,34 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 		!sf::Keyboard::isKeyPressed(sf::Keyboard::S) &&
 		!sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		keyHandled = false;
+		keyHandled = false;//check to make sure key isn't being held
 	}
 
-	//if (madeMove == true)//checks if a valid move was made
-	//{
-		//grid.spawnRandomTile(); //randomly generate new tiles
+	if (grid.isGameOver())
+	{
 
-		//calculate score, might be good to do this within the move functions?
+		//need to display a game over text, show score, and a "press enter to return to main menu"
 
-		//check for game over
-			//if game over, end game
-			//-> go back to a menu?
-	//}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))//press enter to return to menu
+		{
+			gameState = GameState::MainMenu;
+		}
+	}
+
+	/**************************************************
+	* Old code for reference
+	* 
+	*if (madeMove == true)//checks if a valid move was made
+	*{
+	*	grid.spawnRandomTile(); //randomly generate new tiles
+	*	calculate score, might be good to do this within the move functions?
+	*
+	*	check for game over
+	*		if game over, end game
+	*		-> go back to a menu?
+	}
+	*************************************************/
+
 
 	grid.draw(window);  // Draws grid to window
 }

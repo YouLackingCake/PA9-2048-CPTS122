@@ -171,7 +171,7 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 
 		//need to display a game over text, show score, and a "press enter to return to main menu"
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))//press enter to return to menu
 		{
 			gameState = GameState::MainMenu;
 		}

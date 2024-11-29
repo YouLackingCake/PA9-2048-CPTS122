@@ -1,8 +1,17 @@
+
+/*****************************************************************
+* Programmers: Carson CLary, Kyla Jones, Lily Hirano, Kendall Reid
+* Class: CptS 122, Fall 2024;
+* Programming Assignment: PA9
+* Date:12/04/2024
+* Description: 2048 game using SFML. .CPP for grid type
+*****************************************************************/
+
 #include "Grid.hpp"
 //#include "Grid.hpp"
 
-Grid::Grid(const int& rows, const int& cols, const int& newTileSize, 
-	const sf::Color& newColor, sf::Font &newFont)
+Grid::Grid(const int& rows, const int& cols, const int& newTileSize,
+	const sf::Color& newColor, sf::Font& newFont)
 {
 	tileSize = newTileSize;
 
@@ -14,7 +23,7 @@ Grid::Grid(const int& rows, const int& cols, const int& newTileSize,
 			int x = j * tileSize + (j + 1) * 5;  // Add padding between cols of tiles / position tile
 			int y = i * tileSize + (i + 1) * 5;  // Add padding between rows of tiles / position tile
 			//row.emplace_back(x, y, tileSize);  // Place tile into correct row spot
-			row.emplace_back(sf::Vector2f(tileSize, tileSize), sf::Vector2f(x + 90, y + 90), 
+			row.emplace_back(sf::Vector2f(tileSize, tileSize), sf::Vector2f(x + 90, y + 90),
 				newColor, 0/*value*/, newFont);  // Pass the new arguments
 		}
 		tiles.push_back(row);  // Add each row to member vector tiles to create array
@@ -31,6 +40,17 @@ void Grid::draw(sf::RenderWindow& window)
 			tile.draw(window);  // Draws tile to window
 		}
 	}
+
+	sf::Font newFont;
+	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
+
+	sf::Text scoreText;
+	scoreText.setFont(newFont);
+	scoreText.setString("Score: " + to_string(score));
+	scoreText.setCharacterSize(40);
+	scoreText.setFillColor(sf::Color::White);
+	scoreText.setPosition(10, 10);
+	window.draw(scoreText);
 }
 
 // Set number shown on tile
@@ -61,9 +81,11 @@ void Grid::initGrid(const int& gridSize)
 	}
 }
 
-void Grid::moveLeft(int gridSize)
+bool Grid::moveLeft(int gridSize)
 {
 	int row = 0, column = 0;
+	bool moved = false;
+
 	while (row < gridSize)  //cycle through each row
 	{
 		column = 0;
@@ -77,56 +99,64 @@ void Grid::moveLeft(int gridSize)
 			{
 				if (left == 0) //if tile to left is 0, swap places
 				{
-					tiles[row][column].setValue(left);
 					tiles[row][column + 1].setValue(current);
+					tiles[row][column].setValue(0); //(left);
+					moved = true;
 				}
 				else if (current == left) //merge if same value
 				{
+					tiles[row][column + 1].setValue(left + current);
 					tiles[row][column].setValue(0);
-					tiles[row][column + 1].setValue(current + left);
+					moved = true;
 				}
 			}
 			column++;
-		}	
-		row++;
-	}
-
-}
-
-void Grid::moveRight(int gridSize)
-{
-	int row = 0, column = gridSize - 1;
-	while (row  < gridSize)  //cycle through each row
-	{
-		column = gridSize - 1;
-
-		while (column > 0) //cycle through each column
-		{
-			int current = tiles[row][column].getValue();
-			int right = tiles[row][column - 1].getValue();
-
-			if (current != 0) //if not 0, choose what action to do
-			{
-				if (right == 0) //if tile to right is 0, swap places
-				{
-					tiles[row][column].setValue(right);
-					tiles[row][column - 1].setValue(current);
-				}
-				else if (current == right) //merge if same value
-				{
-					tiles[row][column].setValue(0);
-					tiles[row][column - 1].setValue(current + right);
-				}
-			}
-			column--;
 		}
 		row++;
 	}
+	return moved;
 }
 
-void Grid::moveUp(int gridSize)
+bool Grid::moveRight(int gridSize)
+{
+	int row = 0, column = gridSize - 1;
+	bool moved = false;
+
+	while (row < gridSize)  //cycle through each row
+	{
+		column = gridSize - 1;
+
+			while (column > 0) //cycle through each column
+			{
+				int current = tiles[row][column].getValue();
+				int right = tiles[row][column - 1].getValue();
+
+				if (current != 0) //if not 0, choose what action to do
+				{
+					if (right == 0) //if tile to right is 0, swap places
+					{
+						tiles[row][column - 1].setValue(current);
+						tiles[row][column].setValue(0); //(right);
+						moved = true;
+					}
+					else if (current == right) //merge if same value
+					{
+						tiles[row][column - 1].setValue(right + current);
+						tiles[row][column].setValue(0);					
+						moved = true;
+					}
+				}
+				column--;
+			}
+			row++;
+	}
+	return moved;
+}
+
+bool Grid::moveUp(int gridSize)
 {
 	int column = 0, row = gridSize - 1;
+	bool moved = false;
 	while (column < gridSize)  //cycle through each column
 	{
 		row = gridSize - 1;
@@ -140,24 +170,28 @@ void Grid::moveUp(int gridSize)
 			{
 				if (up == 0) //if tile above is 0, swap places
 				{
-					tiles[row][column].setValue(up);
 					tiles[row - 1][column].setValue(current);
+					tiles[row][column].setValue(0); //(up);
+					moved = true;
 				}
 				else if (current == up) //merge if same value
 				{
-					tiles[row - 1][column].setValue(0);
-					tiles[row - 1][column].setValue(current + up);
+					tiles[row - 1][column].setValue(up + current);
+					tiles[row][column].setValue(0); // original [row - 1]
+					moved = true;
 				}
 			}
 			row--;
 		}
 		column++;
 	}
+	return moved;
 }
 
-void Grid::moveDown(int gridSize)
+bool Grid::moveDown(int gridSize)
 {
 	int column = 0, row = 0;
+	bool moved = false;
 	while (column < gridSize)  //cycle through each column
 	{
 		row = 0;
@@ -171,18 +205,65 @@ void Grid::moveDown(int gridSize)
 			{
 				if (up == 0) //if tile below is 0, swap places
 				{
-					tiles[row][column].setValue(up);
 					tiles[row + 1][column].setValue(current);
+					tiles[row][column].setValue(0); //(up);
+					moved = true;
 				}
 				else if (current == up) //merge if same value
 				{
-					tiles[row + 1][column].setValue(0);
-					tiles[row + 1][column].setValue(current + up);
+					tiles[row + 1][column].setValue(up + current);
+					tiles[row][column].setValue(0); // original [row + 1]
+					moved = true;
 				}
 			}
 			row++;
 		}
 		column++;
 	}
+	return moved;
+}
 
+void Grid::spawnRandomTile()
+{
+	vector<pair<int, int>> emptyTiles;//vactor to fill with empty tile coordinates
+
+	for (int row = 0; row < tiles.size(); row++)//traverse rows
+	{
+		for (int column = 0; column < tiles[row].size(); column++)//traverse columns
+		{
+			if (tiles[row][column].getValue() == 0)
+			{
+				emptyTiles.emplace_back(row, column);//fills the vector with all empty tiles for a given turn
+			}
+		}
+	}
+
+	if (!emptyTiles.empty())//checks which tiles are empty
+	{
+		int randomIndex = rand() % emptyTiles.size();//find a randon number within the size of the empty tiles vector
+		int selectedRow = emptyTiles[randomIndex].first;//select a row based on the random index
+		int selectedCol = emptyTiles[randomIndex].second;
+
+		int value = (rand() % 10 < 9) ? 2 : 4;//2 is much more likely than 4 to spawn, change "10 < 9" to change the spawn ratio
+		setTileValue(selectedRow, selectedCol, value);
+	}
+}
+
+bool Grid::isGameOver()
+{
+	for (int row = 0; row < GRID_SIZE; ++row)//traverse the rows
+	{
+		for (int column = 0; column < GRID_SIZE; ++column)//traverse the columns
+		{
+			int current = tiles[row][column].getValue();//get the value of the current tile
+			if (current == 0) return false;//if any tile is empty, game is not over
+
+			if (row > 0 && current == tiles[row - 1][column].getValue()) return false;//equivilent tile in the same column
+			if (row < 3 && current == tiles[row + 1][column].getValue()) return false;
+
+			if (column > 0 && current == tiles[row][column - 1].getValue()) return false;//equivilent tile in the same row
+			if (row < 3 && current == tiles[row][column + 1].getValue()) return false;
+		}
+	}
+	return true;//the game is over
 }

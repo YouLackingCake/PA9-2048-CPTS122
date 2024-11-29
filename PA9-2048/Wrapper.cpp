@@ -201,7 +201,7 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !keyHandled)//check for left
 	{
 		keyHandled = true;
-		madeMove = grid.moveRight(gridSize);
+		madeMove = grid.moveLeft(gridSize);
 		if (madeMove)
 		{
 			grid.spawnRandomTile();
@@ -219,7 +219,7 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !keyHandled)//check for right
 	{
 		keyHandled = true;
-		madeMove = grid.moveLeft(gridSize);
+		madeMove = grid.moveRight(gridSize);
 		if (madeMove)
 		{
 			grid.spawnRandomTile();

@@ -83,105 +83,106 @@ void Grid::initGrid(const int& gridSize)
 
 bool Grid::moveLeft(int gridSize)
 {
-	int row = 0, column = 0;
+	int row = 0;
 	bool moved = false;
 
-	while (row < gridSize)  //cycle through each row
+	for (int row = 0; row < gridSize; row++)  //cycle through each row
 	{
-		column = 0;
-
-		while (column < gridSize - 1) //cycle through each column
+		for (int column = 1; column < gridSize; column++) //cycle through each column
 		{
 			int current = tiles[row][column].getValue();
-			int left = tiles[row][column + 1].getValue();
+			int leftColumn = column;
 
 			if (current != 0) //if not 0, choose what action to do
 			{
-				if (left == 0) //if tile to left is 0, swap places
+				while (leftColumn > 0 && tiles[row][leftColumn - 1].getValue() == 0) //shift while left is 0
 				{
-					tiles[row][column + 1].setValue(current);
-					tiles[row][column].setValue(0); //(left);
+					tiles[row][leftColumn - 1].setValue(tiles[row][leftColumn].getValue());
+					tiles[row][leftColumn].setValue(0);
+					leftColumn--;
+
 					moved = true;
 				}
-				else if (current == left) //merge if same value
+				if (leftColumn > 0 && tiles[row][leftColumn - 1].getValue() == current) //to merge:
 				{
-					tiles[row][column + 1].setValue(left + current);
-					tiles[row][column].setValue(0);
+					tiles[row][leftColumn - 1].setValue(current * 2);
+					tiles[row][leftColumn].setValue(0);
+
 					moved = true;
 				}
 			}
-			column++;
 		}
-		row++;
 	}
 	return moved;
 }
 
 bool Grid::moveRight(int gridSize)
 {
-	int row = 0, column = gridSize - 1;
+	int row = 0;
 	bool moved = false;
 
-	while (row < gridSize)  //cycle through each row
+	for (int row = 0; row < gridSize; row++)  //cycle through each row
 	{
-		column = gridSize - 1;
-
-			while (column > 0) //cycle through each column
-			{
+		for (int column = gridSize - 2; column >= 0; column --) //cycle through each column
+		{
 				int current = tiles[row][column].getValue();
-				int right = tiles[row][column - 1].getValue();
+				int rightColumn = column;
 
 				if (current != 0) //if not 0, choose what action to do
 				{
-					if (right == 0) //if tile to right is 0, swap places
+					while (rightColumn < gridSize - 1 && tiles[row][rightColumn + 1].getValue() == 0) //shift while right is 0
 					{
-						tiles[row][column - 1].setValue(current);
-						tiles[row][column].setValue(0); //(right);
+						tiles[row][rightColumn + 1].setValue(tiles[row][rightColumn].getValue());
+						tiles[row][rightColumn].setValue(0);
+						rightColumn++;
+
 						moved = true;
 					}
-					else if (current == right) //merge if same value
+					if (rightColumn < gridSize - 1 && tiles[row][rightColumn + 1].getValue() == current) //merge if same value
 					{
-						tiles[row][column - 1].setValue(right + current);
-						tiles[row][column].setValue(0);					
+						tiles[row][rightColumn + 1].setValue(current * 2);
+						tiles[row][rightColumn].setValue(0); 
+
 						moved = true;
 					}
 				}
-				column--;
-			}
-			row++;
+		}
 	}
 	return moved;
 }
 
 bool Grid::moveUp(int gridSize)
 {
-	int column = 0, row = gridSize - 1;
+	int column = 0;
 	bool moved = false;
+
 	while (column < gridSize)  //cycle through each column
 	{
-		row = gridSize - 1;
-
-		while (row > 0) //cycle through each row
+		
+		for (int row = 1; row < gridSize; row++) //cycle through each row
 		{
 			int current = tiles[row][column].getValue();
-			int up = tiles[row - 1][column].getValue();
 
 			if (current != 0) //if not 0, choose what action to do
 			{
-				if (up == 0) //if tile above is 0, swap places
+				int upRow = row;
+
+				while (upRow > 0 && tiles[upRow - 1][column].getValue() == 0) //shift while above is 0
 				{
-					tiles[row - 1][column].setValue(current);
-					tiles[row][column].setValue(0); //(up);
+					tiles[upRow - 1][column].setValue(tiles[upRow][column].getValue());
+					tiles[upRow][column].setValue(0);
+					upRow--;
+
 					moved = true;
 				}
-				else if (current == up) //merge if same value
+				if (upRow > 0 && tiles[upRow - 1][column].getValue() == current) //merge if same value
 				{
-					tiles[row - 1][column].setValue(up + current);
-					tiles[row][column].setValue(0); // original [row - 1]
+					tiles[upRow - 1][column].setValue(current * 2);
+					tiles[upRow][column].setValue(0);
+
 					moved = true;
 				}
 			}
-			row--;
 		}
 		column++;
 	}
@@ -190,37 +191,40 @@ bool Grid::moveUp(int gridSize)
 
 bool Grid::moveDown(int gridSize)
 {
-	int column = 0, row = 0;
+	int column = 0;
 	bool moved = false;
+
 	while (column < gridSize)  //cycle through each column
 	{
-		row = 0;
-
-		while (row < gridSize - 1) //cycle through each row
+		for (int row = gridSize -2 ; row  >= 0; row--) //cycle through each row
 		{
 			int current = tiles[row][column].getValue();
-			int up = tiles[row + 1][column].getValue();
 
 			if (current != 0) //if not 0, choose what action to do
 			{
-				if (up == 0) //if tile below is 0, swap places
+				int downRow = row;
+
+				while (downRow < gridSize - 1 && tiles[downRow + 1][column].getValue() == 0) //shift while below is 0
 				{
-					tiles[row + 1][column].setValue(current);
-					tiles[row][column].setValue(0); //(up);
+					tiles[downRow + 1][column].setValue(tiles[downRow][column].getValue());
+					tiles[downRow][column].setValue(0);
+					downRow++;
+
 					moved = true;
 				}
-				else if (current == up) //merge if same value
+				if (downRow < gridSize - 1 && tiles[downRow + 1][column].getValue() == current) //merge if same value
 				{
-					tiles[row + 1][column].setValue(up + current);
-					tiles[row][column].setValue(0); // original [row + 1]
+					tiles[downRow + 1][column].setValue(current * 2);
+					tiles[downRow][column].setValue(0);
+
 					moved = true;
 				}
 			}
-			row++;
 		}
 		column++;
 	}
 	return moved;
+
 }
 
 void Grid::spawnRandomTile()

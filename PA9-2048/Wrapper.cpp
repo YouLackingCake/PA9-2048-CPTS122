@@ -29,6 +29,8 @@ void Wrapper::run()
 	grid.spawnRandomTile();//when game starts, randomly generate 2 tiles
 	grid.spawnRandomTile();
 
+	std::unique_ptr<GameMode> gameMode; // initializes ptr for game mode
+
 	while (window.isOpen())  // Loop while window is open
 	{
 		sf::Event event;  // Declare an event type
@@ -50,7 +52,10 @@ void Wrapper::run()
 			handleSubMenu(window, gameState);
 			break;
 		case GameState::Playing:
-			handlePlaying(window, gameState, grid, gridSize);
+			//if(gameMode) // ensures valid game mode is selected
+			//{
+			handlePlaying(window, gameState, grid, gridSize); // , * gameMode); // updated to handle game mode
+			//}
 			break;
 		case GameState::Exit:
 			window.close();
@@ -180,7 +185,7 @@ void Wrapper::handleSubMenu(sf::RenderWindow& window, GameState& gameState)
 
 }
 
-void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid& grid, const int& gridSize)
+void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid& grid, const int& gridSize) // , GameMode& gameMode)
 {
 	bool madeMove = false;
 	static bool keyHandled = false;
@@ -192,7 +197,7 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !keyHandled)//check for up
 	{
 		keyHandled = true;
-		madeMove = grid.moveUp(gridSize);
+		madeMove = grid.moveUp(gridSize); // , gameMode);
 		if (madeMove)
 		{
 			grid.spawnRandomTile();
@@ -201,7 +206,7 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !keyHandled)//check for left
 	{
 		keyHandled = true;
-		madeMove = grid.moveRight(gridSize);
+		madeMove = grid.moveRight(gridSize); // , gameMode);
 		if (madeMove)
 		{
 			grid.spawnRandomTile();
@@ -210,7 +215,7 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !keyHandled)//check for down
 	{
 		keyHandled = true;
-		madeMove = grid.moveDown(gridSize);
+		madeMove = grid.moveDown(gridSize); // , gameMode);
 		if (madeMove)
 		{
 			grid.spawnRandomTile();
@@ -219,7 +224,7 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !keyHandled)//check for right
 	{
 		keyHandled = true;
-		madeMove = grid.moveLeft(gridSize);
+		madeMove = grid.moveLeft(gridSize); // , gameMode);
 		if (madeMove)
 		{
 			grid.spawnRandomTile();
@@ -249,5 +254,8 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 			//-> go back to a menu?
 	//}
 
+	//window.clear();
 	grid.draw(window);  // Draws grid to window
+	//gameMode.draw(window); // displays score
+	//window.display();
 }

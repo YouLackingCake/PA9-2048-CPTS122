@@ -15,6 +15,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Tile.hpp"
+#include "ClassicMode.hpp"
 
 using namespace std;
 
@@ -33,10 +34,10 @@ public:
 
 	void initGrid(const int& gridSize);  // Initialize values of grid to be 0
 
-	bool moveLeft(int gridSize);
-	bool moveRight(int gridSize);
-	bool moveUp(int gridSize);
-	bool moveDown(int gridSize);
+	bool moveLeft(int gridSize); // , GameMode& gameMode);
+	bool moveRight(int gridSize); // , GameMode& gameMode);
+	bool moveUp(int gridSize); // , GameMode& gameMode);
+	bool moveDown(int gridSize); // , GameMode& gameMode);
 
 	void spawnRandomTile();
 

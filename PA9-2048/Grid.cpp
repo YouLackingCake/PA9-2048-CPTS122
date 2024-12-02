@@ -81,7 +81,7 @@ void Grid::initGrid(const int& gridSize)
 	}
 }
 
-bool Grid::moveLeft(int gridSize)
+bool Grid::moveLeft(int gridSize) //, GameMode& gameMode)
 {
 	int row = 0, column = 0;
 	bool moved = false;
@@ -105,9 +105,12 @@ bool Grid::moveLeft(int gridSize)
 				}
 				else if (current == left) //merge if same value
 				{
-					tiles[row][column + 1].setValue(left + current);
+					int newValue = left + current; // variable for readability
+					tiles[row][column + 1].setValue(newValue);
 					tiles[row][column].setValue(0);
 					moved = true;
+
+					//gameMode.calculateScore(newValue); // calculates score for each merge left
 				}
 			}
 			column++;
@@ -117,7 +120,7 @@ bool Grid::moveLeft(int gridSize)
 	return moved;
 }
 
-bool Grid::moveRight(int gridSize)
+bool Grid::moveRight(int gridSize) //, GameMode& gameMode)
 {
 	int row = 0, column = gridSize - 1;
 	bool moved = false;
@@ -141,9 +144,12 @@ bool Grid::moveRight(int gridSize)
 					}
 					else if (current == right) //merge if same value
 					{
-						tiles[row][column - 1].setValue(right + current);
+						int newValue = right + current; // variable for readability
+						tiles[row][column - 1].setValue(newValue);
 						tiles[row][column].setValue(0);					
 						moved = true;
+
+						//gameMode.calculateScore(newValue); // calculates score for each merge right
 					}
 				}
 				column--;
@@ -153,7 +159,7 @@ bool Grid::moveRight(int gridSize)
 	return moved;
 }
 
-bool Grid::moveUp(int gridSize)
+bool Grid::moveUp(int gridSize) //, GameMode& gameMode)
 {
 	int column = 0, row = gridSize - 1;
 	bool moved = false;
@@ -176,9 +182,12 @@ bool Grid::moveUp(int gridSize)
 				}
 				else if (current == up) //merge if same value
 				{
-					tiles[row - 1][column].setValue(up + current);
+					int newValue = up + current; // variable for readability
+					tiles[row - 1][column].setValue(newValue);
 					tiles[row][column].setValue(0); // original [row - 1]
 					moved = true;
+
+					//gameMode.calculateScore(newValue); // calculates score for each merge up
 				}
 			}
 			row--;
@@ -188,7 +197,7 @@ bool Grid::moveUp(int gridSize)
 	return moved;
 }
 
-bool Grid::moveDown(int gridSize)
+bool Grid::moveDown(int gridSize) //, GameMode& gameMode)
 {
 	int column = 0, row = 0;
 	bool moved = false;
@@ -211,9 +220,12 @@ bool Grid::moveDown(int gridSize)
 				}
 				else if (current == up) //merge if same value
 				{
-					tiles[row + 1][column].setValue(up + current);
+					int newValue = up + current; // variable for readability
+					tiles[row + 1][column].setValue(newValue);
 					tiles[row][column].setValue(0); // original [row + 1]
 					moved = true;
+
+					//gameMode.calculateScore(newValue); // calculates score for each merge down
 				}
 			}
 			row++;

@@ -23,5 +23,5 @@ public:
 private:
 	void handleMainMenu(sf::RenderWindow& window, GameState& gameState);
 	void handleSubMenu(sf::RenderWindow& window, GameState& gameState);
-	void handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid& grid, const int& gridSize);
+	void handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid& grid, const int& gridSize); // , GameMode& gameMode);
 };

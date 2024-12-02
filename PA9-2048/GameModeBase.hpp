@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <string>
 
 class GameMode
@@ -27,7 +28,7 @@ public:
 	virtual void calculateScore(int tileValue) = 0;
 
 	int getScore() const { return score; }
-
+	
 	void updateScoreText()
 	{
 		scoreText.setString("Score: " + std::to_string(score));
@@ -39,6 +40,5 @@ public:
 	}
 
 	virtual ~GameMode() {};
-
 
 };

@@ -3,7 +3,7 @@
 * Class: CptS 122, Fall 2024;
 * Programming Assignment: PA9
 * Date:12/04/2024
-* Description: 2048 game using SFML. Header for grid type
+* Description: 2048 game using SFML. .CPP for wrapper type
 *****************************************************************/
 
 #include "Wrapper.hpp"

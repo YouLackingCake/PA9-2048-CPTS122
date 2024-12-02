@@ -25,7 +25,7 @@ void Wrapper::run()
 	Grid grid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont);  // Creates a 4 X 4 grid
 
 	grid.initGrid(GRID_SIZE);  // Initialize grid to 0
-	grid.spawnRandomTile();//when game starts, randomly generate 2 tiles
+	grid.spawnRandomTile();
 	grid.spawnRandomTile();
 
 	while (window.isOpen())  // Loop while window is open
@@ -64,6 +64,7 @@ void Wrapper::handleMainMenu(sf::RenderWindow& window, GameState& gameState)
 {
 	sf::Font font;
 	sf::Text title, play, rules, exit;
+
 
 	font.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
@@ -240,13 +241,52 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 
 	if (grid.isGameOver())
 	{
+		sf::Text gameOver, pressEnter, showScore;
+		sf::Font font;
 
-		//need to display a game over text, show score, and a "press enter to return to main menu"
+		font.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))//press enter to return to menu
+		gameOver.setFont(font);
+		gameOver.setString("Game Over");
+		gameOver.setCharacterSize(80);
+		gameOver.setFillColor(sf::Color(246, 124, 95));
+		gameOver.setPosition(window.getSize().x / 2, window.getSize().y / 6);
+
+		showScore.setFont(font);
+		showScore.setString("Score: " + to_string(grid.getScore()));
+		showScore.setCharacterSize(60);
+		showScore.setFillColor(sf::Color(245, 149, 99));
+		showScore.setPosition(window.getSize().x / 2, window.getSize().y / 3);
+
+		pressEnter.setFont(font);
+		pressEnter.setString("Press 'Enter' to Return to the Menu");
+		pressEnter.setCharacterSize(50);
+		pressEnter.setFillColor(sf::Color(245, 149, 99));
+		pressEnter.setPosition(window.getSize().x / 2, window.getSize().y / 2.25);
+
+		sf::FloatRect textBounds = gameOver.getLocalBounds();
+		gameOver.setOrigin(textBounds.width / 2, textBounds.height / 2);
+
+		textBounds = showScore.getLocalBounds();
+		showScore.setOrigin(textBounds.width / 2, textBounds.height / 2);
+
+		textBounds = pressEnter.getLocalBounds();
+		pressEnter.setOrigin(textBounds.width / 2, textBounds.height / 2);
+
+		window.draw(showScore);
+		window.draw(pressEnter);
+		window.draw(gameOver);
+		window.display();
+
+		while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))//wait until enter key is pressed
 		{
-			gameState = GameState::MainMenu;
+
 		}
+		gameState = GameState::MainMenu;
+
+		grid.initGrid(GRID_SIZE);//when you return to the menu, initializes board for next game
+		grid.spawnRandomTile();
+		grid.spawnRandomTile();
 	}
 
 	/**************************************************

@@ -271,3 +271,8 @@ bool Grid::isGameOver()
 	}
 	return true;//the game is over
 }
+
+int Grid::getScore()
+{
+	return score;
+}

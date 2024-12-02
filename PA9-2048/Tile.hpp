@@ -23,7 +23,7 @@ public:
 		text.setFont(newFont);
 		text.setCharacterSize(20);
 		text.setFillColor(sf::Color::White);
-		text.setPosition(pos.x + size.x / 2.f, pos.y + size.y / 2.f);  //work in progress. issues with bounds of text
+		text.setPosition(pos.x + size.x / 2.f, pos.y + size.y / 2.f);
 
 	}
 	void setValue(int newValue);

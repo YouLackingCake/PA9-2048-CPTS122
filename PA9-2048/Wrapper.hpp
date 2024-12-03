@@ -12,7 +12,7 @@
 #include "GameModeBase.hpp"
 #include "ClassicMode.hpp"
 
-enum class GameState { MainMenu, SubMenu, Playing, Exit }; // added submenu
+enum class GameState { MainMenu, SubMenu, PlayingClassic, PlayingMultiply, PlayingExponent, Exit }; // added submenu
 
 class Wrapper
 {

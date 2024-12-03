@@ -22,6 +22,7 @@
     <ClCompile Include="ClassicMode.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Test.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
@@ -29,6 +30,7 @@
     <ClInclude Include="ClassicMode.hpp" />
     <ClInclude Include="GameModeBase.hpp" />
     <ClInclude Include="Grid.hpp" />
+    <ClInclude Include="Test.hpp" />
     <ClInclude Include="Tile.hpp" />
     <ClInclude Include="Wrapper.hpp" />
   </ItemGroup>

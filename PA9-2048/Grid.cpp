@@ -11,9 +11,10 @@
 //#include "Grid.hpp"
 
 Grid::Grid(const int& rows, const int& cols, const int& newTileSize,
-	const sf::Color& newColor, sf::Font& newFont)
+	const sf::Color& newColor, sf::Font& newFont, const int& newScore)
 {
 	tileSize = newTileSize;
+	score = newScore;
 
 	for (int i = 0; i < rows; ++i)  // i - rows
 	{
@@ -107,6 +108,7 @@ bool Grid::moveLeft(int gridSize)
 				{
 					tiles[row][leftColumn - 1].setValue(current * 2);
 					tiles[row][leftColumn].setValue(0);
+					setScore(getScore() + tiles[row][leftColumn - 1].getValue());  // Adds merged tile value to score
 
 					moved = true;
 				}
@@ -142,6 +144,7 @@ bool Grid::moveRight(int gridSize)
 					{
 						tiles[row][rightColumn + 1].setValue(current * 2);
 						tiles[row][rightColumn].setValue(0); 
+						setScore(getScore() + tiles[row][rightColumn + 1].getValue());  // Adds merged tile value to score
 
 						moved = true;
 					}
@@ -179,6 +182,7 @@ bool Grid::moveUp(int gridSize)
 				{
 					tiles[upRow - 1][column].setValue(current * 2);
 					tiles[upRow][column].setValue(0);
+					setScore(getScore() + tiles[upRow - 1][column].getValue());  // Adds merged tile value to score
 
 					moved = true;
 				}
@@ -216,6 +220,7 @@ bool Grid::moveDown(int gridSize)
 				{
 					tiles[downRow + 1][column].setValue(current * 2);
 					tiles[downRow][column].setValue(0);
+					setScore(getScore() + tiles[downRow + 1][column].getValue());  // Adds merged tile value to score
 
 					moved = true;
 				}
@@ -270,6 +275,11 @@ bool Grid::isGameOver()
 		}
 	}
 	return true;//the game is over
+}
+
+void Grid::setScore(int newScore)
+{
+	score = newScore;
 }
 
 int Grid::getScore()

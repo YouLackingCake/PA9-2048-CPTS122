@@ -24,7 +24,7 @@ class Grid
 {
 public:
 	Grid(const int& rows, const int& cols, const int& newTileSize,
-		const sf::Color& newColor, sf::Font& newFont);
+		const sf::Color& newColor, sf::Font& newFont, const int& newScore);
 
 	void draw(sf::RenderWindow& window);  // Draws grid
 	void setTileValue(int row, int col, int value);  // Sets number shown on tile
@@ -43,6 +43,7 @@ public:
 
 	bool isGameOver();
 
+	void setScore(int newScore);
 	int getScore();
 
 private:

@@ -13,7 +13,7 @@ void Wrapper::run()
 	srand(static_cast<unsigned>(time(nullptr)));//seeded random using time
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "2048!");
 	window.setKeyRepeatEnabled(false);//makes it so holding a key down only counts as one key press
-
+	int score = 0;
 
 	int tileSize = window.getSize().x / 5;//scales size of tiles in relation to window size
 	const sf::Color newColor = sf::Color::Red;
@@ -22,7 +22,7 @@ void Wrapper::run()
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
 	GameState gameState = GameState::MainMenu;  // Start game in main menu
-	Grid grid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont);  // Creates a 4 X 4 grid
+	Grid grid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);  // Creates a 4 X 4 grid
 
 	grid.initGrid(GRID_SIZE);  // Initialize grid to 0
 	grid.spawnRandomTile();
@@ -119,12 +119,11 @@ void Wrapper::handleSubMenu(sf::RenderWindow& window, GameState& gameState)
 
 	font.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-
 	subMenu.setFont(font);
 	subMenu.setString("Sub-menu");
 	subMenu.setCharacterSize(80);
 	subMenu.setFillColor(sf::Color(246, 124, 95));
-	subMenu.setPosition(window.getSize().x / 5, window.getSize().y / 6);
+	subMenu.setPosition(window.getSize().x / 3, window.getSize().y / 6);
 
 	select.setFont(font);
 	select.setString("Select a game mode:");
@@ -136,41 +135,42 @@ void Wrapper::handleSubMenu(sf::RenderWindow& window, GameState& gameState)
 	mode.setString("1) Classic\n2) Challenge\n3) Timed"); //potential options
 	mode.setCharacterSize(50);
 	mode.setFillColor(sf::Color(245, 149, 99));
-	mode.setPosition(window.getSize().x / 3.5, window.getSize().y / 2.25);
+	mode.setPosition(window.getSize().x / 2.5, window.getSize().y / 2.25);
 
 	while (gameState == GameState::SubMenu)
 	{
-	sf::Event event;
-	while (window.pollEvent(event))
-	{
-		if (event.type == sf::Event::Closed)
+		sf::Event event;
+		while (window.pollEvent(event))
 		{
-			gameState = GameState::Exit;
-			return;
-		}
-		if (event.type == sf::Event::KeyPressed)
-		{
-			if (event.key.code == sf::Keyboard::Num1)
+			if (event.type == sf::Event::Closed)
 			{
-				gameMode = std::make_unique<ClassicMode>(); // sets game to classic mode
-				gameState = GameState::Playing;
+				gameState = GameState::Exit;
 				return;
 			}
-			else if (event.key.code == sf::Keyboard::Num2)
-			{
-				gameMode = std::make_unique<ClassicMode>(); // will set game to challenge mode
-				gameState = GameState::Playing;
-				return;
-			}
-			else if (event.key.code == sf::Keyboard::Num3)
-			{
-				gameMode = std::make_unique<ClassicMode>(); //will set game to timed mode
-				gameState = GameState::Playing;
-				return;
-			}
-		}
 
-	}
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Num1)
+				{
+					gameMode = std::make_unique<ClassicMode>(); // sets game to classic mode
+					gameState = GameState::Playing;
+					return;
+				}
+				else if (event.key.code == sf::Keyboard::Num2)
+				{
+					gameMode = std::make_unique<ClassicMode>(); // will set game to challenge mode
+					gameState = GameState::Playing;
+					return;
+				}
+				else if (event.key.code == sf::Keyboard::Num3)
+				{
+					gameMode = std::make_unique<ClassicMode>(); //will set game to timed mode
+					gameState = GameState::Playing;
+					return;
+				}
+			}
+
+		}
 		window.clear();
 		window.draw(subMenu);
 		window.draw(select);
@@ -186,10 +186,11 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 	bool gameOver = false;
 	static bool keyHandled = false;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))  // Can exit at any time
 	{
 		gameState = GameState::Exit;
 	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !keyHandled)//check for up
 	{
 		keyHandled = true;
@@ -288,21 +289,6 @@ void Wrapper::handlePlaying(sf::RenderWindow& window, GameState& gameState, Grid
 		grid.spawnRandomTile();
 		grid.spawnRandomTile();
 	}
-
-	/**************************************************
-	* Old code for reference
-	* 
-	*if (madeMove == true)//checks if a valid move was made
-	*{
-	*	grid.spawnRandomTile(); //randomly generate new tiles
-	*	calculate score, might be good to do this within the move functions?
-	*
-	*	check for game over
-	*		if game over, end game
-	*		-> go back to a menu?
-	}
-	*************************************************/
-
 
 	grid.draw(window);  // Draws grid to window
 }

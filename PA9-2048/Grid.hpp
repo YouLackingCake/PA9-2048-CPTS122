@@ -32,6 +32,7 @@ public:
 	int getTileSize() const;
 	void setTileSize(int newTileSize);
 
+	vector<vector<Tile>> getTiles();
 	void initGrid(const int& gridSize);  // Initialize values of grid to be 0
 
 	bool moveLeft(int gridSize);

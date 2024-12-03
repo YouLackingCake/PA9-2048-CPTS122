@@ -17,5 +17,10 @@ public:
 
 private:
 	void testGridInitialization();
+	void testMoves();
+	void testLeftMove();
+	void testRightMove();
+	void testUpMove();
+	void testDownMove();
 	void testGameOver();
 };

@@ -70,6 +70,11 @@ void Grid::setTileSize(int newTileSize)
 	tileSize = newTileSize;
 }
 
+vector<vector<Tile>> Grid::getTiles()
+{
+	return tiles;
+}
+
 void Grid::initGrid(const int& gridSize)
 {
 	int value = 0;

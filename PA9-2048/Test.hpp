@@ -17,6 +17,8 @@ public:
 
 private:
 	void testGridInitialization();
+	void testRandomSpawnEmptyGrid();
+	void testRandomSpawnFullGrid();
 	void testMoves();
 	void testLeftMove();
 	void testRightMove();

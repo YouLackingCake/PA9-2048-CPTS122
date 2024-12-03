@@ -14,6 +14,10 @@ void Test::runTests()
 	testMoves();
 	cout << endl;
 	testGameOver();
+	cout << endl;
+	testRandomSpawnEmptyGrid();
+	cout << endl;
+	testRandomSpawnFullGrid();
 }
 
 void Test::testGridInitialization()
@@ -51,6 +55,77 @@ void Test::testGridInitialization()
 
 }
 
+void Test::testRandomSpawnEmptyGrid()
+{
+	bool randomSpawn = false;
+	int tileSize = 100, score = 0;
+	sf::Color newColor;
+
+	sf::Font newFont;
+	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	testGrid.initGrid(GRID_SIZE);
+
+	testGrid.spawnRandomTile();
+
+	for (int row = 0; row < GRID_SIZE; ++row)
+	{
+		for (int column = 0; column < GRID_SIZE; ++column)
+		{
+			if (testGrid.getTiles()[row][column].getValue() != 0)  // TIle was spawned
+			{
+				randomSpawn = true;
+				break;
+			}
+		}
+	}
+
+	if (randomSpawn)
+	{
+		cout << "Random spawn on empty grid test passed" << endl;
+	}
+	else
+	{
+		cout << "No tile was spawned, test failed" << endl;
+	}
+}
+
+void Test::testRandomSpawnFullGrid()
+{
+	bool randomSpawn = false;
+	int tileSize = 100, score = 0, value = 0;
+	sf::Color newColor;
+
+	sf::Font newFont;
+	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	testGrid.initGrid(GRID_SIZE);
+
+	for (int i = 0; i < GRID_SIZE; ++i)  // Set each tile to different value so filled
+	{
+		++value;
+		for (int j = 0; j < GRID_SIZE; ++j)
+		{
+			testGrid.setTileValue(i, j, value);
+			++value;
+		}
+	}
+
+	randomSpawn = testGrid.spawnRandomTile();
+
+	if (!randomSpawn)
+	{
+		cout << "Random spawn on full grid test passed" << endl;
+	}
+	else
+	{
+		cout << "Tile spawned, test failed" << endl;
+	}
+
+}
+
 void Test::testMoves()
 {
 	testLeftMove();
@@ -64,7 +139,6 @@ void Test::testMoves()
 
 void Test::testLeftMove()
 {
-	bool initialized = true;
 	int tileSize = 100, score = 0;
 	sf::Color newColor;
 
@@ -100,7 +174,6 @@ void Test::testLeftMove()
 
 void Test::testRightMove()
 {
-	bool initialized = true;
 	int tileSize = 100, score = 0;
 	sf::Color newColor;
 
@@ -136,7 +209,6 @@ void Test::testRightMove()
 
 void Test::testUpMove()
 {
-	bool initialized = true;
 	int tileSize = 100, score = 0;
 	sf::Color newColor;
 
@@ -172,7 +244,6 @@ void Test::testUpMove()
 
 void Test::testDownMove()
 {
-	bool initialized = true;
 	int tileSize = 100, score = 0;
 	sf::Color newColor;
 
@@ -208,4 +279,34 @@ void Test::testDownMove()
 
 void Test::testGameOver()
 {
+	bool gameOver = true;
+	int tileSize = 100, score = 0, value = 0 ;
+	sf::Color newColor;
+
+	sf::Font newFont;
+	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	testGrid.initGrid(GRID_SIZE);
+
+	for (int i = 0; i < GRID_SIZE; ++i)  // Set each tile to different value to simulate game ending
+	{
+		++value;
+		for (int j = 0; j < GRID_SIZE; ++j)
+		{
+			testGrid.setTileValue(i, j, value);
+			++value;
+		}
+	}
+
+	gameOver = testGrid.isGameOver();
+
+	if (gameOver)
+	{
+		cout << "Game over test passed" << endl;
+	}
+	else
+	{
+		cout << "Game over test failed" << endl;
+	}
 }

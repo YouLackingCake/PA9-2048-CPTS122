@@ -40,7 +40,7 @@ public:
 	bool moveUp(int gridSize);
 	bool moveDown(int gridSize);
 
-	void spawnRandomTile();
+	bool spawnRandomTile();
 
 	bool isGameOver();
 

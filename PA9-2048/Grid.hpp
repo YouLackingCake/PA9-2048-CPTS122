@@ -33,6 +33,7 @@ public:
 	int getTileSize() const;
 	void setTileSize(int newTileSize);
 
+	vector<vector<Tile>> getTiles();
 	void initGrid(const int& gridSize);  // Initialize values of grid to be 0
 
 	bool moveLeft(int gridSize);
@@ -40,7 +41,7 @@ public:
 	bool moveUp(int gridSize);
 	bool moveDown(int gridSize);
 
-	void spawnRandomTile();
+	bool spawnRandomTile();
 
 	bool isGameOver();
 

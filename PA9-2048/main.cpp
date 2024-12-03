@@ -10,9 +10,13 @@
 #include <SFML/Audio/Music.hpp>
 
 #include "Wrapper.hpp"
+#include "Test.hpp"
 
 int main(void)
 {
+	Test test;
+	test.runTests();
+
 	Wrapper game;
 	game.run();
 

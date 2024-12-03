@@ -69,6 +69,11 @@ void Grid::setTileSize(int newTileSize)
 	tileSize = newTileSize;
 }
 
+vector<vector<Tile>> Grid::getTiles()
+{
+	return tiles;
+}
+
 void Grid::initGrid(const int& gridSize)
 {
 	int value = 0;
@@ -235,8 +240,9 @@ bool Grid::moveDown(int gridSize)
 
 }
 
-void Grid::spawnRandomTile()
+bool Grid::spawnRandomTile()
 {
+	bool placed = false;
 	vector<pair<int, int>> emptyTiles;//vactor to fill with empty tile coordinates
 
 	for (int row = 0; row < tiles.size(); row++)//traverse rows
@@ -258,7 +264,9 @@ void Grid::spawnRandomTile()
 
 		int value = (rand() % 10 < 9) ? 2 : 4;//2 is much more likely than 4 to spawn, change "10 < 9" to change the spawn ratio
 		setTileValue(selectedRow, selectedCol, value);
+		placed = true;
 	}
+	return placed;
 }
 
 bool Grid::isGameOver()

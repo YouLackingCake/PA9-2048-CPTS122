@@ -115,7 +115,7 @@ bool Grid::moveLeft(int gridSize)
 					setScore(getScore() + tiles[row][leftColumn - 1].getValue());  // Adds merged tile value to score
 
 					moved = true;
-					score += scoringStrategy->calculateScore(current);
+					//score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}
@@ -152,7 +152,7 @@ bool Grid::moveRight(int gridSize)
 						setScore(getScore() + tiles[row][rightColumn + 1].getValue());  // Adds merged tile value to score
 
 						moved = true;
-						score += scoringStrategy->calculateScore(current);
+						//score += scoringStrategy->calculateScore(current);
 					}
 				}
 		}
@@ -191,7 +191,7 @@ bool Grid::moveUp(int gridSize)
 					setScore(getScore() + tiles[upRow - 1][column].getValue());  // Adds merged tile value to score
 
 					moved = true;
-					score += scoringStrategy->calculateScore(current);
+					//score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}
@@ -230,7 +230,7 @@ bool Grid::moveDown(int gridSize)
 					setScore(getScore() + tiles[downRow + 1][column].getValue());  // Adds merged tile value to score
 
 					moved = true;
-					score += scoringStrategy->calculateScore(current);
+					//score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}

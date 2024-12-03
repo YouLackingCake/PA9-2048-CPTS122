@@ -398,3 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 *.pdb
 *.exe
+Release/PA9-2048.exe
+Release/PA9-2048.pdb

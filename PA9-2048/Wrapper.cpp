@@ -21,16 +21,15 @@ void Wrapper::run()
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-
 	//////////////////////this can be functionized and cleaned up later. For now it works/////////////////////////////
 	ClassicScoring clscScoring;																						//
 	MultiplierScoring mltpScoring;																					//
 	ExponentialScoring expScoring;																					//
 																													//
 	GameState gameState = GameState::MainMenu;  // Start game in main menu											//
-	Grid gridClassic(4, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);  // Creates a 4 X 4 grid				//
-	Grid gridMultiply(4, GRID_SIZE, tileSize, newColor, newFont, &mltpScoring);										//
-	Grid gridExponent(4, GRID_SIZE, tileSize, newColor, newFont, &expScoring);										//
+	Grid gridClassic(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);  // Creates a 4 X 4 grid				//
+	Grid gridMultiply(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &mltpScoring);										//
+	Grid gridExponent(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &expScoring);										//
 																													//
 	gridClassic.initGrid(GRID_SIZE);  // Initialize grid to 0														//
 	gridClassic.spawnRandomTile();	// Spawn 2 random tiles															//
@@ -165,7 +164,7 @@ void Wrapper::handleSubMenu(sf::RenderWindow& window, GameState& gameState)
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			if (event.key.code == sf::Keyboard::Num1)
 			{
 				gameMode = std::make_unique<ClassicMode>(); // sets game to classic mode
 				gameState = GameState::PlayingClassic;
@@ -184,6 +183,7 @@ void Wrapper::handleSubMenu(sf::RenderWindow& window, GameState& gameState)
 				return;
 			}
 		}
+<<<<<<< HEAD
 
 			if (event.type == sf::Event::KeyPressed)
 			{
@@ -208,6 +208,8 @@ void Wrapper::handleSubMenu(sf::RenderWindow& window, GameState& gameState)
 			}
 
 		}
+=======
+>>>>>>> main
 		window.clear();
 		window.draw(subMenu);
 		window.draw(select);

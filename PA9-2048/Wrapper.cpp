@@ -21,12 +21,29 @@ void Wrapper::run()
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-	GameState gameState = GameState::MainMenu;  // Start game in main menu
-	Grid grid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont);  // Creates a 4 X 4 grid
 
-	grid.initGrid(GRID_SIZE);  // Initialize grid to 0
-	grid.spawnRandomTile();
-	grid.spawnRandomTile();
+	//////////////////////this can be functionized and cleaned up later. For now it works/////////////////////////////
+	ClassicScoring clscScoring;																						//
+	MultiplierScoring mltpScoring;																					//
+	ExponentialScoring expScoring;																					//
+																													//
+	GameState gameState = GameState::MainMenu;  // Start game in main menu											//
+	Grid gridClassic(4, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);  // Creates a 4 X 4 grid				//
+	Grid gridMultiply(4, GRID_SIZE, tileSize, newColor, newFont, &mltpScoring);										//
+	Grid gridExponent(4, GRID_SIZE, tileSize, newColor, newFont, &expScoring);										//
+																													//
+	gridClassic.initGrid(GRID_SIZE);  // Initialize grid to 0														//
+	gridClassic.spawnRandomTile();	// Spawn 2 random tiles															//
+	gridClassic.spawnRandomTile();																					//
+																													//
+	gridMultiply.initGrid(GRID_SIZE);																				//
+	gridMultiply.spawnRandomTile();																					//
+	gridMultiply.spawnRandomTile();																					//
+																													//
+	gridExponent.initGrid(GRID_SIZE);																				//
+	gridExponent.spawnRandomTile();																					//
+	gridExponent.spawnRandomTile();																					//
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	while (window.isOpen())  // Loop while window is open
 	{
@@ -48,8 +65,14 @@ void Wrapper::run()
 		case GameState::SubMenu:
 			handleSubMenu(window, gameState);
 			break;
-		case GameState::Playing:
-			handlePlaying(window, gameState, grid, GRID_SIZE);
+		case GameState::PlayingClassic:
+			handlePlaying(window, gameState, gridClassic, GRID_SIZE);
+			break;
+		case GameState::PlayingMultiply:
+			handlePlaying(window, gameState, gridMultiply, GRID_SIZE);
+			break;
+		case GameState::PlayingExponent:
+			handlePlaying(window, gameState, gridExponent, GRID_SIZE);
 			break;
 		case GameState::Exit:
 			window.close();
@@ -105,7 +128,7 @@ void Wrapper::handleMainMenu(sf::RenderWindow& window, GameState& gameState)
 	{
 		gameState = GameState::SubMenu;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))//added an else here just to avoid executing both of these in some weird way
 	{
 		gameState = GameState::Exit;
 	}
@@ -133,7 +156,7 @@ void Wrapper::handleSubMenu(sf::RenderWindow& window, GameState& gameState)
 	select.setPosition(window.getSize().x / 4, window.getSize().y / 3);
 
 	mode.setFont(font);
-	mode.setString("1) Classic\n2) Challenge\n3) Timed"); //potential options
+	mode.setString("1) Classic\n2) Multiplier Score\n3) Exponential Score"); //potential options
 	mode.setCharacterSize(50);
 	mode.setFillColor(sf::Color(245, 149, 99));
 	mode.setPosition(window.getSize().x / 3.5, window.getSize().y / 2.25);
@@ -153,19 +176,19 @@ void Wrapper::handleSubMenu(sf::RenderWindow& window, GameState& gameState)
 			if (event.key.code == sf::Keyboard::Num1)
 			{
 				gameMode = std::make_unique<ClassicMode>(); // sets game to classic mode
-				gameState = GameState::Playing;
+				gameState = GameState::PlayingClassic;
 				return;
 			}
 			else if (event.key.code == sf::Keyboard::Num2)
 			{
 				gameMode = std::make_unique<ClassicMode>(); // will set game to challenge mode
-				gameState = GameState::Playing;
+				gameState = GameState::PlayingMultiply;
 				return;
 			}
 			else if (event.key.code == sf::Keyboard::Num3)
 			{
 				gameMode = std::make_unique<ClassicMode>(); //will set game to timed mode
-				gameState = GameState::Playing;
+				gameState = GameState::PlayingExponent;
 				return;
 			}
 		}

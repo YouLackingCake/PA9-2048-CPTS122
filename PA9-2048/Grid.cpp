@@ -8,12 +8,12 @@
 *****************************************************************/
 
 #include "Grid.hpp"
-//#include "Grid.hpp"
 
 Grid::Grid(const int& rows, const int& cols, const int& newTileSize,
-	const sf::Color& newColor, sf::Font& newFont)
+	const sf::Color& newColor, sf::Font& newFont, ScoringStrategy* strategy)
 {
 	tileSize = newTileSize;
+	setScoringStrategy(strategy);
 
 	for (int i = 0; i < rows; ++i)  // i - rows
 	{
@@ -109,6 +109,7 @@ bool Grid::moveLeft(int gridSize)
 					tiles[row][leftColumn].setValue(0);
 
 					moved = true;
+					score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}
@@ -144,6 +145,7 @@ bool Grid::moveRight(int gridSize)
 						tiles[row][rightColumn].setValue(0); 
 
 						moved = true;
+						score += scoringStrategy->calculateScore(current);
 					}
 				}
 		}
@@ -181,6 +183,7 @@ bool Grid::moveUp(int gridSize)
 					tiles[upRow][column].setValue(0);
 
 					moved = true;
+					score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}
@@ -218,6 +221,7 @@ bool Grid::moveDown(int gridSize)
 					tiles[downRow][column].setValue(0);
 
 					moved = true;
+					score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}
@@ -275,4 +279,17 @@ bool Grid::isGameOver()
 int Grid::getScore()
 {
 	return score;
+}
+
+void Grid::setScoringStrategy(ScoringStrategy* strategy)
+{
+	scoringStrategy = strategy;
+}
+
+void Grid::updateScore(int tileValue)
+{
+	if (scoringStrategy)
+	{
+		score += scoringStrategy->calculateScore(tileValue);
+	}
 }

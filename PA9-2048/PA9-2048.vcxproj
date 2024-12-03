@@ -29,6 +29,7 @@
     <ClInclude Include="ClassicMode.hpp" />
     <ClInclude Include="GameModeBase.hpp" />
     <ClInclude Include="Grid.hpp" />
+    <ClInclude Include="Scoring.hpp" />
     <ClInclude Include="Tile.hpp" />
     <ClInclude Include="Wrapper.hpp" />
   </ItemGroup>

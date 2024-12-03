@@ -190,19 +190,19 @@ void Wrapper::handleSubMenu(sf::RenderWindow& window, GameState& gameState)
 				if (event.key.code == sf::Keyboard::Num1)
 				{
 					gameMode = std::make_unique<ClassicMode>(); // sets game to classic mode
-					gameState = GameState::Playing;
+					gameState = GameState::PlayingClassic;
 					return;
 				}
 				else if (event.key.code == sf::Keyboard::Num2)
 				{
 					gameMode = std::make_unique<ClassicMode>(); // will set game to challenge mode
-					gameState = GameState::Playing;
+					gameState = GameState::PlayingClassic;
 					return;
 				}
 				else if (event.key.code == sf::Keyboard::Num3)
 				{
 					gameMode = std::make_unique<ClassicMode>(); //will set game to timed mode
-					gameState = GameState::Playing;
+					gameState = GameState::PlayingClassic;
 					return;
 				}
 			}

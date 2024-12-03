@@ -8,13 +8,12 @@
 *****************************************************************/
 
 #include "Grid.hpp"
-//#include "Grid.hpp"
 
 Grid::Grid(const int& rows, const int& cols, const int& newTileSize,
-	const sf::Color& newColor, sf::Font& newFont, const int& newScore)
+	const sf::Color& newColor, sf::Font& newFont, ScoringStrategy* strategy)
 {
 	tileSize = newTileSize;
-	score = newScore;
+	setScoringStrategy(strategy);
 
 	for (int i = 0; i < rows; ++i)  // i - rows
 	{
@@ -116,6 +115,7 @@ bool Grid::moveLeft(int gridSize)
 					setScore(getScore() + tiles[row][leftColumn - 1].getValue());  // Adds merged tile value to score
 
 					moved = true;
+					score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}
@@ -152,6 +152,7 @@ bool Grid::moveRight(int gridSize)
 						setScore(getScore() + tiles[row][rightColumn + 1].getValue());  // Adds merged tile value to score
 
 						moved = true;
+						score += scoringStrategy->calculateScore(current);
 					}
 				}
 		}
@@ -190,6 +191,7 @@ bool Grid::moveUp(int gridSize)
 					setScore(getScore() + tiles[upRow - 1][column].getValue());  // Adds merged tile value to score
 
 					moved = true;
+					score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}
@@ -228,6 +230,7 @@ bool Grid::moveDown(int gridSize)
 					setScore(getScore() + tiles[downRow + 1][column].getValue());  // Adds merged tile value to score
 
 					moved = true;
+					score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}
@@ -293,4 +296,17 @@ void Grid::setScore(int newScore)
 int Grid::getScore()
 {
 	return score;
+}
+
+void Grid::setScoringStrategy(ScoringStrategy* strategy)
+{
+	scoringStrategy = strategy;
+}
+
+void Grid::updateScore(int tileValue)
+{
+	if (scoringStrategy)
+	{
+		score += scoringStrategy->calculateScore(tileValue);
+	}
 }

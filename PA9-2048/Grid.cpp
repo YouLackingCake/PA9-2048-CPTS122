@@ -1,4 +1,3 @@
-
 /*****************************************************************
 * Programmers: Carson CLary, Kyla Jones, Lily Hirano, Kendall Reid
 * Class: CptS 122, Fall 2024;
@@ -114,7 +113,7 @@ bool Grid::moveLeft(int gridSize)
 					tiles[row][leftColumn].setValue(0);
 
 					moved = true;
-					score += scoringStrategy->calculateScore(current);
+					score += scoringStrategy->calculateScore(current);//polymorphic function
 				}
 			}
 		}
@@ -150,7 +149,7 @@ bool Grid::moveRight(int gridSize)
 						tiles[row][rightColumn].setValue(0); 
 
 						moved = true;
-						score += scoringStrategy->calculateScore(current);
+						score += scoringStrategy->calculateScore(current);//polymorphic function
 					}
 				}
 		}
@@ -188,7 +187,7 @@ bool Grid::moveUp(int gridSize)
 					tiles[upRow][column].setValue(0);
 
 					moved = true;
-					score += scoringStrategy->calculateScore(current);
+					score += scoringStrategy->calculateScore(current);//polymorphic function
 				}
 			}
 		}
@@ -226,7 +225,7 @@ bool Grid::moveDown(int gridSize)
 					tiles[downRow][column].setValue(0);
 
 					moved = true;
-					score += scoringStrategy->calculateScore(current);
+					score += scoringStrategy->calculateScore(current);//polymorphic function
 				}
 			}
 		}

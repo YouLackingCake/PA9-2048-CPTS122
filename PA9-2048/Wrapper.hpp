@@ -9,8 +9,7 @@
 #pragma once
 
 #include "Grid.hpp"
-#include "GameModeBase.hpp"
-#include "ClassicMode.hpp"
+
 
 enum class GameState { MainMenu, SubMenu, PlayingClassic, PlayingMultiply, PlayingExponent, Exit }; // added submenu
 

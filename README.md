@@ -4,7 +4,7 @@ PA-9 for CPT_S 122 at Washington State University.
 
 ## Description
 This is a basic application for the game 2048 created in C++ and SFML.
-By pressing WASD or arrow keys, merge tiles that have the same number to create 2048! Comes with three game modes: classic, challenged, and timed.
+By pressing WASD or arrow keys, merge tiles that have the same number to create 2048! Comes with three game modes: classic, multiplier, and exponential.
 
 The game works best in x86 mode, not sure why but x64 has been causing some strange bugs and crashes.
 

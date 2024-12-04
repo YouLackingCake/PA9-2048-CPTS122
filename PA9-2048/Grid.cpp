@@ -112,10 +112,10 @@ bool Grid::moveLeft(int gridSize)
 				{
 					tiles[row][leftColumn - 1].setValue(current * 2);
 					tiles[row][leftColumn].setValue(0);
-					setScore(getScore() + tiles[row][leftColumn - 1].getValue());  // Adds merged tile value to score
+					//setScore(getScore() + tiles[row][leftColumn - 1].getValue());  // Adds merged tile value to score
 
 					moved = true;
-					//score += scoringStrategy->calculateScore(current);
+					score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}
@@ -149,10 +149,10 @@ bool Grid::moveRight(int gridSize)
 					{
 						tiles[row][rightColumn + 1].setValue(current * 2);
 						tiles[row][rightColumn].setValue(0); 
-						setScore(getScore() + tiles[row][rightColumn + 1].getValue());  // Adds merged tile value to score
+						//setScore(getScore() + tiles[row][rightColumn + 1].getValue());  // Adds merged tile value to score
 
 						moved = true;
-						//score += scoringStrategy->calculateScore(current);
+						score += scoringStrategy->calculateScore(current);
 					}
 				}
 		}
@@ -188,10 +188,10 @@ bool Grid::moveUp(int gridSize)
 				{
 					tiles[upRow - 1][column].setValue(current * 2);
 					tiles[upRow][column].setValue(0);
-					setScore(getScore() + tiles[upRow - 1][column].getValue());  // Adds merged tile value to score
+					//setScore(getScore() + tiles[upRow - 1][column].getValue());  // Adds merged tile value to score
 
 					moved = true;
-					//score += scoringStrategy->calculateScore(current);
+					score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}
@@ -227,10 +227,10 @@ bool Grid::moveDown(int gridSize)
 				{
 					tiles[downRow + 1][column].setValue(current * 2);
 					tiles[downRow][column].setValue(0);
-					setScore(getScore() + tiles[downRow + 1][column].getValue());  // Adds merged tile value to score
+					//setScore(getScore() + tiles[downRow + 1][column].getValue());  // Adds merged tile value to score
 
 					moved = true;
-					//score += scoringStrategy->calculateScore(current);
+					score += scoringStrategy->calculateScore(current);
 				}
 			}
 		}

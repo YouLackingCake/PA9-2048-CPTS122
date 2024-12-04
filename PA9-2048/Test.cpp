@@ -1,4 +1,3 @@
-#include "Test.hpp"
 /*****************************************************************
 * Programmers: Carson CLary, Kyla Jones, Lily Hirano, Kendall Reid
 * Class: CptS 122, Fall 2024;
@@ -6,6 +5,8 @@
 * Date:12/04/2024
 * Description: 2048 game using SFML. Header for wrapper type
 *****************************************************************/
+
+#include "Test.hpp"
 
 void Test::runTests()
 {
@@ -29,7 +30,9 @@ void Test::testGridInitialization()
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	ClassicScoring clscScoring;
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);
 	testGrid.initGrid(GRID_SIZE);
 
 	for (int row = 0; row < GRID_SIZE; ++row)
@@ -64,7 +67,9 @@ void Test::testRandomSpawnEmptyGrid()
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	ClassicScoring clscScoring;
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);
 	testGrid.initGrid(GRID_SIZE);
 
 	testGrid.spawnRandomTile();
@@ -100,7 +105,9 @@ void Test::testRandomSpawnFullGrid()
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	ClassicScoring clscScoring;
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);
 	testGrid.initGrid(GRID_SIZE);
 
 	for (int i = 0; i < GRID_SIZE; ++i)  // Set each tile to different value so filled
@@ -145,7 +152,9 @@ void Test::testLeftMove()
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	ClassicScoring clscScoring;
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);
 	testGrid.initGrid(GRID_SIZE);
 
 	testGrid.setTileValue(0, 0, 2);  // Sets row 0 col 0 to have a value of 2 to test merge
@@ -180,7 +189,9 @@ void Test::testRightMove()
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	ClassicScoring clscScoring;
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);
 	testGrid.initGrid(GRID_SIZE);
 
 	testGrid.setTileValue(0, 3, 2);  // Sets row 0 col 0 to have a value of 2 to test merge
@@ -215,7 +226,9 @@ void Test::testUpMove()
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	ClassicScoring clscScoring;
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);
 	testGrid.initGrid(GRID_SIZE);
 
 	testGrid.setTileValue(0, 0, 2);  // Sets row 0 col 0 to have a value of 2 to test merge
@@ -250,7 +263,9 @@ void Test::testDownMove()
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	ClassicScoring clscScoring;
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);
 	testGrid.initGrid(GRID_SIZE);
 
 	testGrid.setTileValue(2, 0, 2);  // Sets row 0 col 0 to have a value of 2 to test merge
@@ -286,7 +301,9 @@ void Test::testGameOver()
 	sf::Font newFont;
 	newFont.loadFromFile("SparkyStonesRegular-BW6ld.ttf");
 
-	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, score);
+	ClassicScoring clscScoring;
+
+	Grid testGrid(GRID_SIZE, GRID_SIZE, tileSize, newColor, newFont, &clscScoring);
 	testGrid.initGrid(GRID_SIZE);
 
 	for (int i = 0; i < GRID_SIZE; ++i)  // Set each tile to different value to simulate game ending

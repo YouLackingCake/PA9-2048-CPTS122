@@ -1,4 +1,3 @@
-
 /*****************************************************************
 * Programmers: Carson CLary, Kyla Jones, Lily Hirano, Kendall Reid
 * Class: CptS 122, Fall 2024;
